@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate review_lock.yaml without third-party YAML dependencies."""
+"""Validate review_lock contract files stored in JSON-compatible format."""
 
 from __future__ import annotations
 
