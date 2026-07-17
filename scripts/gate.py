@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run non-blocking validate, package, upload-status, and safety-scan gates."""
+"""Run validation, regression, packaging, upload-status, and safety-scan gates."""
 
 from __future__ import annotations
 
@@ -25,6 +25,34 @@ def files(skill: Path):
             yield path
 
 
+def frontmatter_name(skill_md: Path) -> str | None:
+    if not skill_md.is_file():
+        return None
+    text = skill_md.read_text(encoding="utf-8")
+    front = re.match(r"^---\n(.*?)\n---", text, re.S)
+    if not front:
+        return None
+    name = re.search(r"^name:\s*(.+)$", front.group(1), re.M)
+    return name.group(1).strip() if name else None
+
+
+def resolve_skill(candidate: Path) -> Path:
+    """Resolve either a skill directory or a workspace containing one skill."""
+    if (candidate / "SKILL.md").is_file():
+        return candidate
+
+    matches = sorted(
+        path.parent
+        for path in candidate.glob("*/SKILL.md")
+        if path.is_file()
+    )
+    if len(matches) == 1:
+        return matches[0]
+    if not matches:
+        raise FileNotFoundError(f"未找到 SKILL.md：{candidate}")
+    raise RuntimeError(f"发现多个 skill，请指定具体目录：{', '.join(str(path) for path in matches)}")
+
+
 def validate(skill: Path) -> dict:
     errors = []
     skill_md = skill / "SKILL.md"
@@ -36,11 +64,11 @@ def validate(skill: Path) -> dict:
         if not front:
             errors.append("SKILL.md frontmatter 非法")
         else:
-            name = re.search(r"^name:\s*(.+)$", front.group(1), re.M)
-            if not name or name.group(1).strip() != skill.name:
-                errors.append("name 必须与目录名一致")
-            if not re.fullmatch(r"[a-z0-9-]+", skill.name):
-                errors.append("目录名不是合法 kebab-case")
+            name = frontmatter_name(skill_md)
+            if not name:
+                errors.append("缺少 name")
+            elif not re.fullmatch(r"[a-z0-9-]+", name):
+                errors.append("name 不是合法 kebab-case")
             if not re.search(r"^description:\s*", front.group(1), re.M):
                 errors.append("缺少 description")
     required = [
@@ -57,10 +85,11 @@ def validate(skill: Path) -> dict:
 
 def package(skill: Path, output_root: Path) -> dict:
     output_root.mkdir(parents=True, exist_ok=True)
-    output = output_root / f"{skill.name}.zip"
+    package_name = frontmatter_name(skill / "SKILL.md") or skill.name
+    output = output_root / f"{package_name}.zip"
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
         for path in files(skill):
-            archive.write(path, (Path(skill.name) / path.relative_to(skill)).as_posix())
+            archive.write(path, (Path(package_name) / path.relative_to(skill)).as_posix())
     return {"status": "passed", "output": str(output), "bytes": output.stat().st_size}
 
 
@@ -81,7 +110,13 @@ def main() -> int:
     parser.add_argument("workspace", nargs="?", default=".")
     args = parser.parse_args()
     candidate = Path(args.workspace).resolve()
-    skill = candidate / "final-exam-prep" if (candidate / "final-exam-prep" / "SKILL.md").is_file() else candidate
+
+    try:
+        skill = resolve_skill(candidate)
+    except (FileNotFoundError, RuntimeError) as exc:
+        print(json.dumps({"status": "failed", "error": str(exc)}, ensure_ascii=False, indent=2))
+        return 1
+
     report = {
         "validate": validate(skill),
         "regression": {},
@@ -108,8 +143,10 @@ def main() -> int:
         report["package"] = package(skill, skill / "dist")
     except OSError as exc:
         report["package"] = {"status": "failed", "error": str(exc)}
+
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    return 0
+    required_gates = ("validate", "regression", "package", "safety_scan")
+    return 0 if all(report[name].get("status") == "passed" for name in required_gates) else 1
 
 
 if __name__ == "__main__":
