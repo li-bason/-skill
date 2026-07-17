@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "review_frames": {
+    "final-three-files-v1": "review-frames/final-three-files.md",
+    "language-summary-v1": "review-frames/language-summary.md",
+    "contest-gap-training-v1": "review-frames/contest-gap-training.md"
+  },
+  "subject_presets": {
+    "liberal-arts-v1": "subject-presets/liberal-arts.md",
+    "science-v1": "subject-presets/science.md",
+    "engineering-v1": "subject-presets/engineering.md",
+    "language-v1": "subject-presets/language.md",
+    "contest-general-v1": "subject-presets/contest-general.md"
+  },
+  "question_patterns": {
+    "liberal-arts-answer-v1": "question-patterns/liberal-arts-answer.md",
+    "calculation-answer-v1": "question-patterns/calculation-answer.md",
+    "language-practice-v1": "question-patterns/language-practice.md",
+    "contest-gap-question-v1": "question-patterns/contest-gap-question.md"
+  }
+}

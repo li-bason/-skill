@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "task": "数据挖掘",
+  "sources": [
+    {
+      "source_id": "SRC-001",
+      "original_name": "数据挖掘复习.pdf",
+      "stored_path": "sources/SRC-001-数据挖掘复习.pdf",
+      "normalized_path": "sources/SRC-001.md",
+      "sha256": "287001585b99e0bc7734fa204d816da30384e01d8c9878bf9dc7c99dd13ee2b7",
+      "status": "parsed",
+      "role": "supporting",
+      "course_match": "matched_data_mining",
+      "imported_at": "2026-07-16T10:35:50.239406+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-002",
+      "original_name": "用户直接输入的《数据挖掘》复习大纲",
+      "stored_path": "sources/SRC-002-用户直接输入的-数据挖掘-复习大纲.md",
+      "normalized_path": "sources/SRC-002-用户直接输入的-数据挖掘-复习大纲.md",
+      "sha256": "a78b5b067cefefe7048de2624f911004a5644414f268754c9593377cc0f3e51d",
+      "status": "parsed",
+      "kind": "user_text",
+      "role": "primary",
+      "course_match": "matched_data_mining",
+      "imported_at": "2026-07-16T10:56:43.537233+00:00",
+      "error": null
+    }
+  ],
+  "conflicts": []
+}

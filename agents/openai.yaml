@@ -1,0 +1,6 @@
+interface:
+  display_name: "Final Exam Prep"
+  short_description: "从教材、大纲和题型生成可持续更新的复习资料"
+  default_prompt: "Use $final-exam-prep to organize my course materials into an exam review plan, notes, mind map, questions, and answers."
+policy:
+  allow_implicit_invocation: true

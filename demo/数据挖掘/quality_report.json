@@ -1,0 +1,13 @@
+{
+  "task_dir": "D:\\git仓库\\final-exam-prep\\demo\\数据挖掘",
+  "mode": "final_exam",
+  "category": "science",
+  "valid": true,
+  "metrics": {
+    "sources": 2,
+    "questions": 207,
+    "unresolved_sources": 0
+  },
+  "errors": [],
+  "warnings": []
+}
