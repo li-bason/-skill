@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "task": {
+    "mode": "final_exam",
+    "name": "离散数学",
+    "category": "science",
+    "task_dir": "tasks/期末/离散数学"
+  },
+  "templates": {
+    "review_frame": "final-three-files-v1",
+    "subject_preset": "science-v1",
+    "question_pattern": "calculation-answer-v1"
+  },
+  "inputs": {
+    "manifest": "source_manifest.json",
+    "outline_required": true,
+    "question_types_required": true
+  },
+  "outputs": [
+    "atomic_points.md",
+    "知识点.md",
+    "思维导图.md",
+    "题目.md",
+    "答案.md"
+  ],
+  "rules": {
+    "full_pipeline_required": true,
+    "minimum_questions_per_point": 3,
+    "difficulty_ratio": {
+      "basic": 0.4,
+      "medium": 0.4,
+      "advanced": 0.2
+    },
+    "stable_ids": true,
+    "source_attribution": true,
+    "update_mode": "incremental_with_reorganize"
+  },
+  "status": "locked"
+}

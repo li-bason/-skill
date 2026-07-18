@@ -11,7 +11,7 @@ import sys
 import zipfile
 from pathlib import Path
 
-SKIP_PARTS = {"tasks", "sessions", "demo", "__pycache__", "dist", ".git"}
+SKIP_PARTS = {"tasks", "sessions", "demo", "tmp", "tmp_pdf_check", "__pycache__", "dist", ".git"}
 SUSPICIOUS = [
     re.compile(r"\brm\s+-rf\b", re.I),
     re.compile(r"\bgit\s+reset\s+--hard\b", re.I),
@@ -85,6 +85,7 @@ def main() -> int:
     report = {
         "validate": validate(skill),
         "regression": {},
+        "cross_route_regression": {},
         "package": {},
         "upload": {
             "status": "not_run",
@@ -104,12 +105,28 @@ def main() -> int:
         "output": regression.stdout.strip(),
         "error": regression.stderr.strip(),
     }
+    cross_route = subprocess.run(
+        [sys.executable, str(skill / "scripts" / "test_cross_route_regressions.py")],
+        cwd=skill,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    report["cross_route_regression"] = {
+        "status": "passed" if cross_route.returncode == 0 else "failed",
+        "output": cross_route.stdout.strip(),
+        "error": cross_route.stderr.strip(),
+    }
     try:
         report["package"] = package(skill, skill / "dist")
     except OSError as exc:
         report["package"] = {"status": "failed", "error": str(exc)}
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    return 0
+    failed = any(
+        isinstance(value, dict) and value.get("status") == "failed"
+        for value in report.values()
+    )
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

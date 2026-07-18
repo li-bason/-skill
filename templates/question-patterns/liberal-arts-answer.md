@@ -4,6 +4,8 @@
 <!-- question_id: Q-... atomic_id: AP-... type: short_answer difficulty: basic|medium|advanced source: original|generated -->
 【简答/论述】<具体题干>
 
+> **考查要求：** <识记/理解/分析/评价>
+
 <!-- answer_id: Q-... atomic_id: AP-... -->
 #### Q-...｜简答题
 

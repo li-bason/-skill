@@ -1,0 +1,70 @@
+{
+  "outline_parents": [
+    "1 反爬虫、Robots 与 CSV", "2 HTTP 与请求库", "3 爬虫基本流程", "4 Scrapy 框架",
+    "5 动态与静态网页", "6 Selenium 与动态网页", "7 Pandas 数据结构与函数", "8 数据清洗",
+    "9 数据预处理", "10 爬虫类型与场景", "11 Selenium 等待方式", "12 MySQL 通用函数",
+    "13 PyMySQL 使用与资源释放", "14 requests GET 通用代码"
+  ],
+  "atoms": [
+    {"id":"AP-001","parent":"1 反爬虫、Robots 与 CSV","title":"设置固定用户代理","action":"作用/配置","source_id":"SRC-010","pages":[24,25],"extracts":["通过设置User-Agent模仿正常浏览器，是一个常用的应对服务器反爬虫的策略。","在Scrapy项目中，可以在settings.py中设置USER_AGENT，也可以修改DEFAULT_REQUEST_HEADERS中的User-Agent。"],"minimum_questions":3},
+    {"id":"AP-002","parent":"1 反爬虫、Robots 与 CSV","title":"设置下载延迟","action":"作用/配置","source_id":"SRC-010","pages":[26],"extracts":["可以通过设置下载延时，限制爬虫访问速度，避免因过快访问服务器而被禁止。","在settings.py中通过DOWNLOAD_DELAY配置下载延时时间，单位为秒并支持小数。"],"minimum_questions":3},
+    {"id":"AP-003","parent":"1 反爬虫、Robots 与 CSV","title":"禁用 Cookies","action":"作用/配置","source_id":"SRC-010","pages":[26],"extracts":["Scrapy框架会自动处理Cookies，也就是模仿浏览器去跟踪Cookies。","在settings.py中将COOKIES_ENABLED设置为False，可以禁用Cookies。"],"minimum_questions":3},
+    {"id":"AP-004","parent":"1 反爬虫、Robots 与 CSV","title":"自动限速扩展","action":"作用/配置","source_id":"SRC-010","pages":[27],"extracts":["自动限速扩展能根据Scrapy服务器以及目标网站的负载自动限制爬取速度。","在settings.py中将AUTOTHROTTLE_ENABLED设置为True，可以开启自动限速扩展。"],"minimum_questions":3},
+    {"id":"AP-005","parent":"1 反爬虫、Robots 与 CSV","title":"设置随机用户代理","action":"流程/应用","source_id":"SRC-010","pages":[28,29,30,31,32],"extracts":["先收集一批可用的UserAgent，并以列表形式添加到settings.py。","随机代理中间件类继承UserAgentMiddleware并重写process_request方法。","使用random.choice从用户代理列表随机取值并赋给请求头。","在settings.py的DOWNLOADER_MIDDLEWARES中激活自定义中间件。"],"minimum_questions":3},
+    {"id":"AP-006","parent":"1 反爬虫、Robots 与 CSV","title":"设置随机 IP 代理","action":"流程/应用","source_id":"SRC-010","pages":[33,34,35,36,37,38],"extracts":["设置随机IP代理是应对反爬虫限制的有效措施，尤其适用于大型爬取任务。","在settings.py中配置代理IP列表。","自定义中间件类继承HttpProxyMiddleware并覆盖process_request方法。","使用random.choice从IP池随机选取代理，并赋值给request.meta[\"proxy\"]。"],"minimum_questions":3},
+    {"id":"AP-007","parent":"1 反爬虫、Robots 与 CSV","title":"Robots 协议","action":"定义/作用/使用","source_id":"SRC-018","pages":[11,15],"extracts":["Robots协议称作爬虫协议、机器人协议，全称是网络爬虫排除标准，用来告诉爬虫和搜索引擎可以抓取哪些页面。","Robots协议通常写在robots.txt文件中。","Robots协议是建议但非约束性，网络爬虫可以不遵守，但存在法律风险。"],"minimum_questions":3},
+    {"id":"AP-008","parent":"1 反爬虫、Robots 与 CSV","title":"CSV 的定义","action":"定义/结构","source_id":"SRC-018","pages":[24],"extracts":["CSV全称为Comma-Separated Values，即逗号分隔值或字符分隔值，其文件以纯文本形式存储表格数据。","每条记录由字段组成，字段间最常见的分隔符是逗号或制表符。","所有记录具有相同的字段序列，相当于结构化表的纯文本形式。"],"minimum_questions":3},
+
+    {"id":"AP-009","parent":"2 HTTP 与请求库","title":"urllib 库","action":"定义/组成/作用","source_id":"SRC-030","pages":[1],"extracts":["urllib是一个收集了多个涉及URL的模块的包。","urllib.request用于打开和读取URL；urllib.error包含urllib.request抛出的异常；urllib.parse用于解析URL；urllib.robotparser用于解析robots.txt文件。"],"minimum_questions":3},
+    {"id":"AP-010","parent":"2 HTTP 与请求库","title":"requests 库","action":"定义/功能/区别","source_id":"SRC-015","pages":[4],"extracts":["Requests库是使用Python语言编写、基于Urllib开发的HTTP库，可以帮助发送请求并获取响应数据。","Requests库支持HTTP连接保持、连接池、cookie会话、文件上传、响应编码识别以及URL和POST数据自动编码。","Requests库比urllib使用更方便。"],"minimum_questions":3},
+    {"id":"AP-011","parent":"2 HTTP 与请求库","title":"HTTP 请求过程","action":"流程","source_id":"SRC-027","pages":[23,24,25],"extracts":["建立TCP连接。","浏览器向服务器发送请求命令。","服务器向客户机应答。","服务器关闭TCP连接；如果使用Connection: keep-alive，连接可以保持打开。","浏览器接收服务器响应的数据并进行渲染或保存。"],"minimum_questions":3},
+    {"id":"AP-012","parent":"2 HTTP 与请求库","title":"响应头 Allow 字段","action":"定义/作用","source_id":"SRC-027","pages":[30],"extracts":["Allow表示服务器支持哪些请求方法，如GET、POST等。"],"minimum_questions":3},
+    {"id":"AP-013","parent":"2 HTTP 与请求库","title":"响应头 Content-Type 字段","action":"定义/作用","source_id":"SRC-027","pages":[30],"extracts":["Content-Type表示后面的文档属于什么类型。"],"minimum_questions":3},
+    {"id":"AP-014","parent":"2 HTTP 与请求库","title":"响应头 Date 字段","action":"定义/作用","source_id":"SRC-027","pages":[30],"extracts":["Date表示当前的GMT时间。"],"minimum_questions":3},
+    {"id":"AP-015","parent":"2 HTTP 与请求库","title":"响应头 Location 字段","action":"定义/作用","source_id":"SRC-027","pages":[30],"extracts":["Location表示客户应当到哪里去提取文档。"],"minimum_questions":3},
+    {"id":"AP-016","parent":"2 HTTP 与请求库","title":"响应头 Refresh 字段","action":"定义/作用","source_id":"SRC-027","pages":[30],"extracts":["Refresh表示浏览器应该在多少时间之后刷新文档，以秒计。"],"minimum_questions":3},
+    {"id":"AP-017","parent":"2 HTTP 与请求库","title":"响应头 Server 字段","action":"定义/作用","source_id":"SRC-027","pages":[30],"extracts":["Server表示服务器名字。"],"minimum_questions":3},
+    {"id":"AP-018","parent":"2 HTTP 与请求库","title":"响应头 Set-Cookie 字段","action":"定义/作用","source_id":"SRC-027","pages":[30],"extracts":["Set-Cookie用于设置和页面关联的Cookie。"],"minimum_questions":3},
+
+    {"id":"AP-019","parent":"3 爬虫基本流程","title":"爬虫的基本步骤","action":"流程","source_id":"SRC-025","pages":[29],"extracts":["使用Scrapy框架编写爬虫的五个基本步骤包括：创建爬虫项目、生成爬虫模板、定义数据容器、编写数据解析函数、运行爬虫。"],"minimum_questions":3},
+    {"id":"AP-020","parent":"4 Scrapy 框架","title":"Scrapy 框架的定义与作用","action":"定义/作用","source_id":"SRC-007","pages":[5],"extracts":["爬虫框架是一个半成品的爬虫，已经实现工作队列、下载器、数据保存、日志、异常处理和反反爬虫等通用功能。","使用者主要通过配置通用功能并编写网站爬取规则，从而专注于页面分析。"],"minimum_questions":3},
+    {"id":"AP-021","parent":"4 Scrapy 框架","title":"Scrapy 体系架构","action":"流程/组件作用","source_id":"SRC-025","pages":[5,6,7,10,11],"extracts":["引擎处理整个系统的数据流并触发事务，是整个框架的核心。","调度器接收引擎发来的请求，压入队列并在引擎请求时返回，同时去除重复网址。","下载器负责下载网页内容并将内容返回给蜘蛛。","蜘蛛从网页中提取信息和链接，项目管道负责持久化、验证及清理蜘蛛抽取的实体。","下载器中间件处理引擎与下载器之间的请求和响应，蜘蛛中间件处理蜘蛛的响应输入和请求输出。"],"minimum_questions":3},
+    {"id":"AP-022","parent":"5 动态与静态网页","title":"动态网页的概念","action":"定义/判断","source_id":"SRC-029","pages":[5,7],"extracts":["动态网页的页面代码虽然没有变化，但显示内容可以随着时间、环境或数据库操作结果而改变。","动态网页与动画、滚动字幕等视觉动态效果没有直接关系。","如果网页源代码中找不到需要爬取的数据，可能采用了动态网页技术。"],"minimum_questions":3},
+    {"id":"AP-023","parent":"5 动态与静态网页","title":"静态网页的概念","action":"定义/判断","source_id":"SRC-029","pages":[5],"extracts":["静态网页随着HTML代码的生成，页面内容和显示效果基本不会发生变化，除非修改页面代码。"],"minimum_questions":3},
+    {"id":"AP-024","parent":"6 Selenium 与动态网页","title":"Selenium 的作用","action":"定义/作用","source_id":"SRC-029","pages":[16],"extracts":["Selenium是一个自动化测试工具，也被广泛用于爬虫。","在爬虫中主要使用Selenium解决动态网页的加载和渲染问题。","Selenium通过代码操作浏览器，模拟滑动鼠标、单击按钮等行为，并在网页加载或渲染后提取信息。"],"minimum_questions":3},
+    {"id":"AP-025","parent":"6 Selenium 与动态网页","title":"动态网页逆向分析法","action":"定义/流程/场景","source_id":"SRC-029","pages":[12,13,14,15],"extracts":["逆向分析法通过浏览器开发者工具观察网页请求，找出动态数据对应的请求地址和参数。","分析请求的响应数据后，可以直接发送请求并解析JSON或脚本中的数据。","逆向分析法适用于结构较清晰的动态网页；反爬虫较强时可能需要分析JavaScript脚本。"],"minimum_questions":3},
+    {"id":"AP-026","parent":"6 Selenium 与动态网页","title":"动态网页模拟法","action":"定义/流程/场景","source_id":"SRC-029","pages":[12,16],"extracts":["模拟法使用Selenium等第三方库模拟浏览器行为，解决页面加载和渲染问题。","模拟法通过浏览器驱动执行点击、滚动等操作，待网页加载或渲染后提取信息。"],"minimum_questions":3},
+
+    {"id":"AP-027","parent":"7 Pandas 数据结构与函数","title":"Series 的用法","action":"定义/应用","source_id":"SRC-011","pages":[4,12],"extracts":["Series是一种类似一维数组的对象，由一组数据以及一组与之相关的数据标签（索引）组成。","可以通过索引使用Series实现对行和列的操作。"],"minimum_questions":3},
+    {"id":"AP-028","parent":"7 Pandas 数据结构与函数","title":"DataFrame 的用法","action":"定义/应用","source_id":"SRC-011","pages":[4,14],"extracts":["DataFrame是Pandas中的表格型数据结构，包含一组有序的列，每列可以是不同的值类型。","DataFrame既有行索引也有列索引，可以看作由Series组成的字典。","在DataFrame中可以按列、按切片或按条件选取数据。"],"minimum_questions":3},
+    {"id":"AP-029","parent":"7 Pandas 数据结构与函数","title":"merge 函数的功能","action":"定义/参数/应用","source_id":"SRC-011","pages":[30,31],"extracts":["pandas.merge依据一个或多个键将多个DataFrame连接起来，类似于数据库连接。","left和right分别表示左表和右表，how指定连接方式，on指定连接键。"],"minimum_questions":3},
+    {"id":"AP-030","parent":"7 Pandas 数据结构与函数","title":"apply 函数的功能","action":"定义/参数/应用","source_id":"SRC-031","pages":[1],"extracts":["DataFrame.apply沿DataFrame的某一轴应用函数。","axis=0时函数作用于各列，axis=1时函数作用于各行。"],"minimum_questions":3},
+    {"id":"AP-031","parent":"7 Pandas 数据结构与函数","title":"map 函数的功能","action":"定义/参数/应用","source_id":"SRC-032","pages":[1],"extracts":["Series.map按照输入映射关系或函数映射Series中的值。","map可以用函数、字典或Series为每个值生成替代值。"],"minimum_questions":3},
+
+    {"id":"AP-032","parent":"8 数据清洗","title":"数据清洗的概念","action":"定义/目标","source_id":"SRC-026","pages":[25],"extracts":["广义上，数据清洗是将原始数据进行精简以去除冗余和消除不一致，并使剩余数据转换成可接受标准格式的过程。","狭义上，数据清洗是在数据仓库和数据挖掘前处理数据源，使数据达到准确性、完整性、一致性、唯一性和有效性。"],"minimum_questions":3},
+    {"id":"AP-033","parent":"8 数据清洗","title":"数据清洗的过程","action":"流程","source_id":"SRC-026","pages":[28],"extracts":["重新审查和校验原始数据。","删除重复信息并纠正错误。","保持数据的精确性、完整性、一致性、有效性和唯一性。","必要时分解和重组数据，最终转换为满足数据质量或应用要求的数据。"],"minimum_questions":3},
+    {"id":"AP-034","parent":"8 数据清洗","title":"数据清洗的主要任务","action":"分类/应用","source_id":"SRC-012","pages":[12,13,18,26,28],"extracts":["使用DataFrame.isnull判断缺失值。","使用DataFrame.fillna填充缺失值，或使用DataFrame.dropna删除缺失值。","使用DataFrame.duplicated判断重复数据，使用DataFrame.drop_duplicates删除重复数据。"],"minimum_questions":3},
+
+    {"id":"AP-035","parent":"9 数据预处理","title":"数据清洗阶段","action":"任务/应用","source_id":"SRC-033","pages":[1],"extracts":["数据清洗通过删除异常值、替换缺失值、平滑噪声数据和纠正不一致数据来提高数据质量。"],"minimum_questions":3},
+    {"id":"AP-036","parent":"9 数据预处理","title":"数据集成阶段","action":"任务/应用","source_id":"SRC-033","pages":[1],"extracts":["数据集成把来自多个来源的数据组合起来，并处理由此产生的冗余与不一致。"],"minimum_questions":3},
+    {"id":"AP-037","parent":"9 数据预处理","title":"数据归约阶段","action":"任务/应用","source_id":"SRC-033","pages":[1],"extracts":["数据归约在保持原始数据完整性的同时，产生数据量更小的压缩表示。"],"minimum_questions":3},
+    {"id":"AP-038","parent":"9 数据预处理","title":"数据变换阶段","action":"任务/应用","source_id":"SRC-033","pages":[1],"extracts":["数据变换把数据转换成适合建模的形式，常见策略包括平滑、属性构造、聚合和规范化。"],"minimum_questions":3},
+    {"id":"AP-039","parent":"9 数据预处理","title":"数据预处理的核心目标","action":"目标/质量标准","source_id":"SRC-033","pages":[1],"extracts":["数据预处理的核心目标是提高数据质量，使数据更适合后续分析、建模和预测。","准确性、完整性和一致性是影响数据质量的三个主要因素。"],"minimum_questions":3},
+    {"id":"AP-040","parent":"9 数据预处理","title":"数据预处理的总体过程","action":"流程","source_id":"SRC-033","pages":[1],"extracts":["数据预处理可以分为四个阶段：数据清洗、数据集成、数据归约和数据变换。"],"minimum_questions":3},
+
+    {"id":"AP-041","parent":"10 爬虫类型与场景","title":"通用网络爬虫及适用场景","action":"定义/场景","source_id":"SRC-027","pages":[11],"extracts":["通用网络爬虫又称全网爬虫，爬行对象从一些种子URL扩充到整个Web。","通用网络爬虫主要为门户站点搜索引擎和大型Web服务提供商采集数据。"],"minimum_questions":3},
+    {"id":"AP-042","parent":"10 爬虫类型与场景","title":"聚焦网络爬虫及适用场景","action":"定义/场景","source_id":"SRC-027","pages":[12],"extracts":["聚焦网络爬虫又称主题网络爬虫，是选择性爬行与预先定义主题相关页面的网络爬虫。","聚焦网络爬虫适用于面向特定主题的信息采集。"],"minimum_questions":3},
+    {"id":"AP-043","parent":"10 爬虫类型与场景","title":"增量式网络爬虫及适用场景","action":"定义/场景","source_id":"SRC-027","pages":[13],"extracts":["增量式网络爬虫对已下载网页采取增量更新，只爬行新产生或已经发生变化的网页。","增量式网络爬虫适用于需要尽可能保持页面最新的场景。"],"minimum_questions":3},
+    {"id":"AP-044","parent":"10 爬虫类型与场景","title":"深层网络爬虫及适用场景","action":"定义/场景","source_id":"SRC-027","pages":[14],"extracts":["深层网络爬虫用于采集不能通过静态超链接直接获得、需要通过表单等方式访问的深层Web数据。"],"minimum_questions":3},
+
+    {"id":"AP-045","parent":"11 Selenium 等待方式","title":"强制等待","action":"定义/代码/优缺点","source_id":"SRC-024","pages":[5],"extracts":["强制等待使用time.sleep，程序必须等待足够的固定时间后才进行下一步。"],"minimum_questions":3},
+    {"id":"AP-046","parent":"11 Selenium 等待方式","title":"隐式等待","action":"定义/代码/优缺点","source_id":"SRC-024","pages":[6],"extracts":["隐式等待设置最大等待时间；若网页在期限内加载完成则执行下一步，否则等待至时间截止。","隐式等待使用wd.implicitly_wait(second)控制。","其缺点是可能等待整个页面加载完成，即使目标元素已经出现。"],"minimum_questions":3},
+    {"id":"AP-047","parent":"11 Selenium 等待方式","title":"显式等待","action":"定义/代码/优缺点","source_id":"SRC-024","pages":[7,8],"extracts":["显式等待使用WebDriverWait，并配合until和until_not方法根据判断条件灵活等待。","当所需元素加载出来时，显式等待即可继续执行下一步。"],"minimum_questions":3},
+
+    {"id":"AP-048","parent":"12 MySQL 通用函数","title":"MySQL 增删改查通用函数封装过程","action":"实现流程","source_id":"SRC-019","pages":[18,20,21,22,23,32],"extracts":["把数据库连接参数、SQL语句和参数数据作为函数输入。","在函数中获取连接与游标，调用cursor.execute执行增、删、改或查SQL。","增删改成功时提交事务，失败时回滚；查询时读取并返回结果。","完成后关闭游标和数据库连接。"],"minimum_questions":3},
+    {"id":"AP-049","parent":"13 PyMySQL 使用与资源释放","title":"PyMySQL 使用步骤","action":"流程","source_id":"SRC-019","pages":[7,9,10,11,12,13,14],"extracts":["使用pymysql.connect创建数据库连接对象。","使用connect.cursor获取游标对象。","使用cursor.execute执行SQL语句。","提交事务，并关闭游标和数据库连接。"],"minimum_questions":3},
+    {"id":"AP-050","parent":"13 PyMySQL 使用与资源释放","title":"关闭游标释放资源","action":"关键语句/作用","source_id":"SRC-019","pages":[14],"extracts":["完成数据库操作后，使用cursor.close()关闭游标并释放资源。"],"minimum_questions":3},
+    {"id":"AP-051","parent":"13 PyMySQL 使用与资源释放","title":"关闭数据库连接释放资源","action":"关键语句/作用","source_id":"SRC-019","pages":[14],"extracts":["完成数据库操作后，使用connect.close()关闭数据库连接并释放资源。"],"minimum_questions":3},
+    {"id":"AP-052","parent":"14 requests GET 通用代码","title":"requests 库发送 GET 请求的通用代码","action":"实现流程/代码","source_id":"SRC-015","pages":[12,14,15],"extracts":["导入requests模块。","使用response = requests.get(url, params=params, headers=headers)发送GET请求。","通过response.status_code检查状态，通过response.text或response.content获取响应内容。"],"minimum_questions":3}
+  ]
+}

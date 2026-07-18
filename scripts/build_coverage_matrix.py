@@ -11,7 +11,6 @@ import sys
 from pathlib import Path
 
 POINT = re.compile(r"^#{3,6}\s+([A-Z]+(?:-[A-Za-z0-9_-]+|\d+))\s+(.+?)$", re.M)
-QUESTION = re.compile(r"<!--\s*question_id:\s*([A-Za-z0-9_-]+).*?-->", re.S)
 SOURCE = re.compile(r"SRC-\d{3}(?:#(?:Page\s+)?\d+(?:-\d+)?)?")
 
 
@@ -39,8 +38,15 @@ def main() -> int:
                     "sources": set(),
                 })
                 row["file"].append(filename)
-                row["question_count"] += len(QUESTION.findall(block))
                 row["sources"].update(SOURCE.findall(block))
+        question_manifest = json.loads((task_dir / "question_manifest.json").read_text(encoding="utf-8"))
+        counts: dict[str, int] = {}
+        for item in question_manifest.get("questions", []):
+            atomic_id = item.get("atomic_id")
+            if atomic_id:
+                counts[atomic_id] = counts.get(atomic_id, 0) + 1
+        for point_id, row in row_map.items():
+            row["question_count"] = counts.get(point_id, 0)
         rows = [{
             "point_id": row["point_id"], "title": row["title"],
             "file": ";".join(row["file"]), "question_count": row["question_count"],

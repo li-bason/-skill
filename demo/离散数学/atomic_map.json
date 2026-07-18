@@ -1,0 +1,709 @@
+{
+  "version": 1,
+  "outline_parents": [
+    "第一章 数学语言与证明方法",
+    "第二章 命题逻辑",
+    "第三章 一阶逻辑",
+    "第四章 关系",
+    "第五章 函数",
+    "第六章 图",
+    "第七章 树及其应用",
+    "第八章 组合计数基础",
+    "第九章 容斥原理"
+  ],
+  "atoms": [
+    {
+      "id": "AP-001",
+      "parent": "第一章 数学语言与证明方法",
+      "title": "元素属于与集合包含的区别",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "id": "AP-002",
+      "parent": "第一章 数学语言与证明方法",
+      "title": "相对补集",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "id": "AP-003",
+      "parent": "第一章 数学语言与证明方法",
+      "title": "对称差",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "id": "AP-004",
+      "parent": "第一章 数学语言与证明方法",
+      "title": "幂集",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "id": "AP-005",
+      "parent": "第一章 数学语言与证明方法",
+      "title": "集合综合运算",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "id": "AP-006",
+      "parent": "第二章 命题逻辑",
+      "title": "命题符号化",
+      "action": "转换",
+      "source_id": "SRC-002",
+      "pages": [
+        3
+      ]
+    },
+    {
+      "id": "AP-007",
+      "parent": "第二章 命题逻辑",
+      "title": "五种联结词与真值",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        3
+      ]
+    },
+    {
+      "id": "AP-008",
+      "parent": "第二章 命题逻辑",
+      "title": "重言式、矛盾式与可满足式",
+      "action": "分类/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        3
+      ]
+    },
+    {
+      "id": "AP-009",
+      "parent": "第二章 命题逻辑",
+      "title": "常用等值式",
+      "action": "识记/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        3
+      ]
+    },
+    {
+      "id": "AP-010",
+      "parent": "第二章 命题逻辑",
+      "title": "等值演算证明",
+      "action": "证明",
+      "source_id": "SRC-002",
+      "pages": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "AP-011",
+      "parent": "第二章 命题逻辑",
+      "title": "公式类型证明",
+      "action": "证明",
+      "source_id": "SRC-002",
+      "pages": [
+        3
+      ]
+    },
+    {
+      "id": "AP-012",
+      "parent": "第二章 命题逻辑",
+      "title": "主析取范式与极小项",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "AP-013",
+      "parent": "第二章 命题逻辑",
+      "title": "主合取范式与极大项",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "AP-014",
+      "parent": "第二章 命题逻辑",
+      "title": "主析取范式与主合取范式的关系",
+      "action": "比较/转换",
+      "source_id": "SRC-002",
+      "pages": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "AP-015",
+      "parent": "第二章 命题逻辑",
+      "title": "推理定律与推理证明",
+      "action": "识记/证明",
+      "source_id": "SRC-002",
+      "pages": [
+        3,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "AP-016",
+      "parent": "第二章 命题逻辑",
+      "title": "归结原则证明",
+      "action": "证明",
+      "source_id": "SRC-002",
+      "pages": [
+        3,
+        8,
+        9
+      ]
+    },
+    {
+      "id": "AP-017",
+      "parent": "第三章 一阶逻辑",
+      "title": "谓词逻辑命题符号化",
+      "action": "转换",
+      "source_id": "SRC-002",
+      "pages": [
+        10
+      ]
+    },
+    {
+      "id": "AP-018",
+      "parent": "第三章 一阶逻辑",
+      "title": "全称量词与存在量词",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        10
+      ]
+    },
+    {
+      "id": "AP-019",
+      "parent": "第三章 一阶逻辑",
+      "title": "自由变元与约束变元",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        10
+      ]
+    },
+    {
+      "id": "AP-020",
+      "parent": "第三章 一阶逻辑",
+      "title": "有限论域中的量词消去",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        10
+      ]
+    },
+    {
+      "id": "AP-021",
+      "parent": "第三章 一阶逻辑",
+      "title": "前束范式及量词等值变换",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        10,
+        11
+      ]
+    },
+    {
+      "id": "AP-022",
+      "parent": "第四章 关系",
+      "title": "二元关系的集合表示",
+      "action": "表示/转换",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-023",
+      "parent": "第四章 关系",
+      "title": "二元关系的矩阵表示",
+      "action": "表示/转换",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-024",
+      "parent": "第四章 关系",
+      "title": "二元关系的关系图表示",
+      "action": "表示/转换",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-025",
+      "parent": "第四章 关系",
+      "title": "关系的定义域与值域",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-026",
+      "parent": "第四章 关系",
+      "title": "关系的逆运算",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-027",
+      "parent": "第四章 关系",
+      "title": "关系的合成运算",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-028",
+      "parent": "第四章 关系",
+      "title": "自反闭包",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-029",
+      "parent": "第四章 关系",
+      "title": "对称闭包",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-030",
+      "parent": "第四章 关系",
+      "title": "传递闭包",
+      "action": "定义/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-031",
+      "parent": "第四章 关系",
+      "title": "等价关系",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-032",
+      "parent": "第四章 关系",
+      "title": "集合的划分与商集",
+      "action": "计算/应用",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-033",
+      "parent": "第四章 关系",
+      "title": "偏序关系",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-034",
+      "parent": "第四章 关系",
+      "title": "哈斯图",
+      "action": "绘制/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-035",
+      "parent": "第四章 关系",
+      "title": "极大元、极小元、最大元与最小元",
+      "action": "判断/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        12
+      ]
+    },
+    {
+      "id": "AP-036",
+      "parent": "第五章 函数",
+      "title": "从 A 到 B 的函数与 A 上的函数",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        13
+      ]
+    },
+    {
+      "id": "AP-037",
+      "parent": "第五章 函数",
+      "title": "单射",
+      "action": "定义/证明",
+      "source_id": "SRC-002",
+      "pages": [
+        13
+      ]
+    },
+    {
+      "id": "AP-038",
+      "parent": "第五章 函数",
+      "title": "满射",
+      "action": "定义/证明",
+      "source_id": "SRC-002",
+      "pages": [
+        13
+      ]
+    },
+    {
+      "id": "AP-039",
+      "parent": "第五章 函数",
+      "title": "双射",
+      "action": "定义/证明",
+      "source_id": "SRC-002",
+      "pages": [
+        13
+      ]
+    },
+    {
+      "id": "AP-040",
+      "parent": "第五章 函数",
+      "title": "函数复合",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        13
+      ]
+    },
+    {
+      "id": "AP-041",
+      "parent": "第五章 函数",
+      "title": "反函数",
+      "action": "计算/证明",
+      "source_id": "SRC-002",
+      "pages": [
+        13
+      ]
+    },
+    {
+      "id": "AP-042",
+      "parent": "第六章 图",
+      "title": "简单图",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-043",
+      "parent": "第六章 图",
+      "title": "无向图顶点度数",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-044",
+      "parent": "第六章 图",
+      "title": "有向图顶点的入度与出度",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-045",
+      "parent": "第六章 图",
+      "title": "握手定理及推论",
+      "action": "定理/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-046",
+      "parent": "第六章 图",
+      "title": "度数列的可图化判断",
+      "action": "判断/证明",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-047",
+      "parent": "第六章 图",
+      "title": "强连通",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-048",
+      "parent": "第六章 图",
+      "title": "单向连通",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-049",
+      "parent": "第六章 图",
+      "title": "弱连通",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-050",
+      "parent": "第六章 图",
+      "title": "关联矩阵",
+      "action": "表示/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-051",
+      "parent": "第六章 图",
+      "title": "邻接矩阵",
+      "action": "表示/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-052",
+      "parent": "第六章 图",
+      "title": "二部图",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-053",
+      "parent": "第六章 图",
+      "title": "欧拉图",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-054",
+      "parent": "第六章 图",
+      "title": "哈密顿图",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-055",
+      "parent": "第六章 图",
+      "title": "平面图",
+      "action": "定义/判断",
+      "source_id": "SRC-002",
+      "pages": [
+        14
+      ]
+    },
+    {
+      "id": "AP-056",
+      "parent": "第七章 树及其应用",
+      "title": "无向树的性质 m=n-1",
+      "action": "定理/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        15
+      ]
+    },
+    {
+      "id": "AP-057",
+      "parent": "第七章 树及其应用",
+      "title": "最小生成树与避圈法",
+      "action": "计算/应用",
+      "source_id": "SRC-002",
+      "pages": [
+        15
+      ]
+    },
+    {
+      "id": "AP-058",
+      "parent": "第七章 树及其应用",
+      "title": "最优二叉树及权的计算",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        15
+      ]
+    },
+    {
+      "id": "AP-059",
+      "parent": "第七章 树及其应用",
+      "title": "最佳前缀码",
+      "action": "构造/应用",
+      "source_id": "SRC-002",
+      "pages": [
+        15
+      ]
+    },
+    {
+      "id": "AP-060",
+      "parent": "第七章 树及其应用",
+      "title": "根树的周游",
+      "action": "流程/计算",
+      "source_id": "SRC-002",
+      "pages": [
+        15
+      ]
+    },
+    {
+      "id": "AP-061",
+      "parent": "第八章 组合计数基础",
+      "title": "加法法则",
+      "action": "定理/应用",
+      "source_id": "SRC-002",
+      "pages": [
+        16
+      ]
+    },
+    {
+      "id": "AP-062",
+      "parent": "第八章 组合计数基础",
+      "title": "乘法法则",
+      "action": "定理/应用",
+      "source_id": "SRC-002",
+      "pages": [
+        16
+      ]
+    },
+    {
+      "id": "AP-063",
+      "parent": "第八章 组合计数基础",
+      "title": "分类与分步计数策略",
+      "action": "比较/应用",
+      "source_id": "SRC-002",
+      "pages": [
+        16
+      ]
+    },
+    {
+      "id": "AP-064",
+      "parent": "第八章 组合计数基础",
+      "title": "排列",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        16
+      ]
+    },
+    {
+      "id": "AP-065",
+      "parent": "第八章 组合计数基础",
+      "title": "环排列",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        16
+      ]
+    },
+    {
+      "id": "AP-066",
+      "parent": "第八章 组合计数基础",
+      "title": "组合",
+      "action": "计算",
+      "source_id": "SRC-002",
+      "pages": [
+        16
+      ]
+    },
+    {
+      "id": "AP-067",
+      "parent": "第九章 容斥原理",
+      "title": "两个集合的容斥原理",
+      "action": "计算/应用",
+      "source_id": "SRC-002",
+      "pages": [
+        17,
+        18
+      ]
+    },
+    {
+      "id": "AP-068",
+      "parent": "第九章 容斥原理",
+      "title": "三个集合的容斥原理",
+      "action": "计算/应用",
+      "source_id": "SRC-002",
+      "pages": [
+        17,
+        19
+      ]
+    }
+  ]
+}

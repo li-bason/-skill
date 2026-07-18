@@ -1,0 +1,13 @@
+{
+  "task_dir": "D:\\git仓库\\final-exam-prep\\tasks\\数据采集与预处理-期末复习",
+  "mode": "final_exam",
+  "category": "engineering",
+  "valid": true,
+  "metrics": {
+    "sources": 33,
+    "questions": 156,
+    "unresolved_sources": 0
+  },
+  "errors": [],
+  "warnings": []
+}

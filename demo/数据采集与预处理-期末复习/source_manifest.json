@@ -1,0 +1,346 @@
+{
+  "version": 1,
+  "task": "数据采集与预处理",
+  "sources": [
+    {
+      "source_id": "SRC-001",
+      "original_name": "用户声明的课程名称",
+      "stored_path": "sources/SRC-001-用户声明的课程名称.md",
+      "normalized_path": "sources/SRC-001-用户声明的课程名称.md",
+      "sha256": "20ba7d535c5d14e2a5276ce4dcc20e1861a607c7ae01cc9ce1fa086939b3848b",
+      "status": "parsed",
+      "kind": "user_text",
+      "role": "primary",
+      "course_match": "primary",
+      "imported_at": "2026-07-17T14:44:42.624758+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-002",
+      "original_name": "《数据采集与预处理》必修-期末复习要点及题型分布20260528new.pdf",
+      "stored_path": "sources/SRC-002-《数据采集与预处理》必修-期末复习要点及题型分布20260528new.pdf",
+      "normalized_path": "sources/SRC-002.md",
+      "sha256": "a79f642f69ef070506465acfd8ccec928c716b0c5af990cc8d2434c0b7ac7f2f",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:45:58.214428+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-003",
+      "original_name": "《数据采集与预处理》（周勇）作者提供课件.zip",
+      "stored_path": "sources/SRC-003-《数据采集与预处理》（周勇）作者提供课件.zip",
+      "sha256": "fd6db5cb9c2b7574383e3fd6006bf535d9f8837337e7c1a0066c0429f7ecf694",
+      "status": "archive_extracted",
+      "children": 18
+    },
+    {
+      "source_id": "SRC-004",
+      "original_name": "0：课程简介.ppt",
+      "stored_path": "sources/SRC-004-0：课程简介.ppt",
+      "normalized_path": null,
+      "sha256": "ce65b873b40d31ec40b6d518ac610d60cb17b9704e59a874163e8c46d5a7123b",
+      "status": "converted",
+      "imported_at": "2026-07-17T14:49:27.238208+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-005",
+      "original_name": "10：动态网页数据采集-selenium基础.ppt",
+      "stored_path": "sources/SRC-005-10：动态网页数据采集-selenium基础.ppt",
+      "normalized_path": null,
+      "sha256": "23e7f3ef53bdc9e5f217e6e5df71d105edd99c97309a9e022919c59c6b7e0d7a",
+      "status": "converted",
+      "imported_at": "2026-07-17T14:49:27.279637+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-006",
+      "original_name": "11：动态网页数据采集-selenium多窗口.ppt",
+      "stored_path": "sources/SRC-006-11：动态网页数据采集-selenium多窗口.ppt",
+      "normalized_path": null,
+      "sha256": "2b7d2e47fe7655560e3ce2388ec0a8000e043b7205f43f061268d019a4f3063e",
+      "status": "converted",
+      "imported_at": "2026-07-17T14:49:27.357952+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-007",
+      "original_name": "12：爬虫框架-scrapy入门.pptx",
+      "stored_path": "sources/SRC-007-12：爬虫框架-scrapy入门.pptx",
+      "normalized_path": "sources/SRC-007.md",
+      "sha256": "ebf433369865391b5d2319842dcc0b7f402d1dc9ef316c62bc02bd5dadb46052",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:28.313600+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-008",
+      "original_name": "13：爬虫框架-scrapy框架初探.ppt",
+      "stored_path": "sources/SRC-008-13：爬虫框架-scrapy框架初探.ppt",
+      "normalized_path": null,
+      "sha256": "34489281eaf62aac286f205745dfc49cf4dc15d409dad29a34512a12ea21d0af",
+      "status": "converted",
+      "imported_at": "2026-07-17T14:49:28.354884+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-009",
+      "original_name": "14：爬虫框架-scrapy的数据处理.pptx",
+      "stored_path": "sources/SRC-009-14：爬虫框架-scrapy的数据处理.pptx",
+      "normalized_path": "sources/SRC-009.md",
+      "sha256": "a6694f76fbb1f8a35775dcf967fb96f4c05807540effc108996a9c2668f2de96",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:28.570478+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-010",
+      "original_name": "15：爬虫框架-scrapy框架深入.pptx",
+      "stored_path": "sources/SRC-010-15：爬虫框架-scrapy框架深入.pptx",
+      "normalized_path": "sources/SRC-010.md",
+      "sha256": "a12a57de3411b58f4e221775e095d1405282e9ddd381248e1504823c658730d0",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:28.813112+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-011",
+      "original_name": "16：数据清洗-pandas处理基础.pptx",
+      "stored_path": "sources/SRC-011-16：数据清洗-pandas处理基础.pptx",
+      "normalized_path": "sources/SRC-011.md",
+      "sha256": "9b272d7c4a6e3af9ceb925271b8cfd953df35668ffc10c0d95b7c30306e15da4",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:29.104742+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-012",
+      "original_name": "17：数据清洗-脏数据处理.pptx",
+      "stored_path": "sources/SRC-012-17：数据清洗-脏数据处理.pptx",
+      "normalized_path": "sources/SRC-012.md",
+      "sha256": "73fb3df6f84463cd4d59f52197ef97da47882d21aa9a6ae4102376ee62be0e23",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:29.333301+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-013",
+      "original_name": "1：数据采集基础.ppt",
+      "stored_path": "sources/SRC-013-1：数据采集基础.ppt",
+      "normalized_path": null,
+      "sha256": "05b07b2897d4b6f09b6108d288b7454270b9cf7cf8ef6501de7fd4b831901572",
+      "status": "converted",
+      "imported_at": "2026-07-17T14:49:29.389199+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-014",
+      "original_name": "2：数据采集基础.ppt",
+      "stored_path": "sources/SRC-014-2：数据采集基础.ppt",
+      "normalized_path": null,
+      "sha256": "3c085130a012638d6e4428bff418fc3910bd2d45b7917a824ed4bd0395bcd440",
+      "status": "converted",
+      "imported_at": "2026-07-17T14:49:29.444248+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-015",
+      "original_name": "3：requests库.pptx",
+      "stored_path": "sources/SRC-015-3：requests库.pptx",
+      "normalized_path": "sources/SRC-015.md",
+      "sha256": "dd83e51699f1ee4d3fc9ba733968c9f8e7aa06310a0ddf49544e39c0c6bb0ddd",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:29.631744+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-016",
+      "original_name": "4：静态网页爬取模块-Requests库.pptx",
+      "stored_path": "sources/SRC-016-4：静态网页爬取模块-Requests库.pptx",
+      "normalized_path": "sources/SRC-016.md",
+      "sha256": "2ce9119ac432e2eba34cc9acd58ac05457608390f964e35b535343fdfd4be907",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:29.776993+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-017",
+      "original_name": "5：静态网页爬取模块-xpath.pptx",
+      "stored_path": "sources/SRC-017-5：静态网页爬取模块-xpath.pptx",
+      "normalized_path": "sources/SRC-017.md",
+      "sha256": "2f9fc999c38cee75addf79b4c3c7e9b04f9dcb0e5e4e14030cf75a01dda54580",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:29.964330+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-018",
+      "original_name": "6：静态网页爬取模块-数据存储.pptx",
+      "stored_path": "sources/SRC-018-6：静态网页爬取模块-数据存储.pptx",
+      "normalized_path": "sources/SRC-018.md",
+      "sha256": "5d32c50bfd7eb81c8ea5a2bb69f78673a37cdfee302b2382a68cb6a66a0b1974",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:30.110894+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-019",
+      "original_name": "7：静态网页爬取模块-数据存储pymysql.pptx",
+      "stored_path": "sources/SRC-019-7：静态网页爬取模块-数据存储pymysql.pptx",
+      "normalized_path": "sources/SRC-019.md",
+      "sha256": "61e74524b9b73e00791de7d9d0258067471d5aca6f2a36f192c314de8ecd52b9",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:49:30.388156+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-020",
+      "original_name": "8：静态网页爬取模块-数据解析beautifulsoap.ppt",
+      "stored_path": "sources/SRC-020-8：静态网页爬取模块-数据解析beautifulsoap.ppt",
+      "normalized_path": null,
+      "sha256": "d331dc54861afeca94dfeb1a08c49fd3648acd4e95453b5a5419e58c8f912b52",
+      "status": "converted",
+      "imported_at": "2026-07-17T14:49:30.451740+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-021",
+      "original_name": "9：动态网页数据采集-ajax与json.ppt",
+      "stored_path": "sources/SRC-021-9：动态网页数据采集-ajax与json.ppt",
+      "normalized_path": null,
+      "sha256": "2cc14a80d72fadadc45bd3d2b6e7b4416830a2cf3829cd4981c4b57cd944bc13",
+      "status": "converted",
+      "imported_at": "2026-07-17T14:49:30.522779+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-022",
+      "original_name": "SRC-004-0：课程简介.converted.pptx",
+      "stored_path": "sources/SRC-022-SRC-004-0：课程简介.converted.pptx",
+      "normalized_path": "sources/SRC-022.md",
+      "sha256": "bf6ed049c7ce35fcd10de10e277d155db970886c035dce30d4b51cdf4748ef14",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:51:05.088113+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-023",
+      "original_name": "SRC-005-10：动态网页数据采集-selenium基础.converted.pptx",
+      "stored_path": "sources/SRC-023-SRC-005-10：动态网页数据采集-selenium基础.converted.pptx",
+      "normalized_path": "sources/SRC-023.md",
+      "sha256": "55abcca7086ed5a68b27e8473ad1208f0da22cfa5ae9d4735b43e9b2ad529077",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:51:05.291208+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-024",
+      "original_name": "SRC-006-11：动态网页数据采集-selenium多窗口.converted.pptx",
+      "stored_path": "sources/SRC-024-SRC-006-11：动态网页数据采集-selenium多窗口.converted.pptx",
+      "normalized_path": "sources/SRC-024.md",
+      "sha256": "d4fadf858793f2f7f72a601d63bf2dbca36ca4947f3fb87edf65474ad09fbbb3",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:51:05.394699+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-025",
+      "original_name": "SRC-008-13：爬虫框架-scrapy框架初探.converted.pptx",
+      "stored_path": "sources/SRC-025-SRC-008-13：爬虫框架-scrapy框架初探.converted.pptx",
+      "normalized_path": "sources/SRC-025.md",
+      "sha256": "9eb1ca3bb9d811b74e23928e5cdc56f0e637be41d38bc6c2b8cc17d5d419a7e2",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:51:05.515617+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-026",
+      "original_name": "SRC-013-1：数据采集基础.converted.pptx",
+      "stored_path": "sources/SRC-026-SRC-013-1：数据采集基础.converted.pptx",
+      "normalized_path": "sources/SRC-026.md",
+      "sha256": "d4982f8e4551f7c24ff6148104ad89f4210eaea71b438c22f98a7d7abc418ed6",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:51:05.619757+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-027",
+      "original_name": "SRC-014-2：数据采集基础.converted.pptx",
+      "stored_path": "sources/SRC-027-SRC-014-2：数据采集基础.converted.pptx",
+      "normalized_path": "sources/SRC-027.md",
+      "sha256": "f6fff3d414505a9613e6f755732591d2e70bf3a0aa06a018ce58cd665ce8bb7a",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:51:05.809921+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-028",
+      "original_name": "SRC-020-8：静态网页爬取模块-数据解析beautifulsoap.converted.pptx",
+      "stored_path": "sources/SRC-028-SRC-020-8：静态网页爬取模块-数据解析beautifulsoap.converted.pptx",
+      "normalized_path": "sources/SRC-028.md",
+      "sha256": "35ed2e14da049b8d8f2cc54a659190f1aab7f1361e8a11427ae179c9b350c72b",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:51:05.893153+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-029",
+      "original_name": "SRC-021-9：动态网页数据采集-ajax与json.converted.pptx",
+      "stored_path": "sources/SRC-029-SRC-021-9：动态网页数据采集-ajax与json.converted.pptx",
+      "normalized_path": "sources/SRC-029.md",
+      "sha256": "daf8fd6bf9abb3894b06aa5f70ae9f3e38d3b5594d46f4107d669e8c5363ab32",
+      "status": "parsed",
+      "imported_at": "2026-07-17T14:51:05.997151+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-030",
+      "original_name": "urllib — URL 处理模块",
+      "stored_path": "sources/SRC-030.md",
+      "normalized_path": "sources/SRC-030.md",
+      "status": "external",
+      "role": "supporting",
+      "url": "https://docs.python.org/zh-cn/3.13/library/urllib.html",
+      "title": "urllib — URL 处理模块 — Python 3.13.14 文档",
+      "accessed_at": "2026-07-17",
+      "atomic_ids": ["AP-008"]
+    },
+    {
+      "source_id": "SRC-031",
+      "original_name": "pandas.DataFrame.apply official documentation",
+      "stored_path": "sources/SRC-031.md",
+      "normalized_path": "sources/SRC-031.md",
+      "status": "external",
+      "role": "supporting",
+      "url": "https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html",
+      "title": "pandas.DataFrame.apply — pandas documentation",
+      "accessed_at": "2026-07-17",
+      "atomic_ids": ["AP-024"]
+    },
+    {
+      "source_id": "SRC-032",
+      "original_name": "pandas.Series.map official documentation",
+      "stored_path": "sources/SRC-032.md",
+      "normalized_path": "sources/SRC-032.md",
+      "status": "external",
+      "role": "supporting",
+      "url": "https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.map.html",
+      "title": "pandas.Series.map — pandas documentation",
+      "accessed_at": "2026-07-17",
+      "atomic_ids": ["AP-025"]
+    },
+    {
+      "source_id": "SRC-033",
+      "original_name": "Data preprocessing in detail",
+      "stored_path": "sources/SRC-033.md",
+      "normalized_path": "sources/SRC-033.md",
+      "status": "external",
+      "role": "supporting",
+      "url": "https://developer.ibm.com/learningpaths/get-started-data-science/data-preprocessing/",
+      "title": "Data preprocessing in detail — IBM Developer",
+      "accessed_at": "2026-07-17",
+      "atomic_ids": ["AP-029", "AP-030", "AP-031", "AP-032", "AP-033", "AP-034"]
+    }
+  ],
+  "conflicts": []
+}

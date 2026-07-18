@@ -14,13 +14,24 @@ HEADING = re.compile(r"^(#{3,6})\s+(.+?)\s*$", re.M)
 Q_META = re.compile(r"<!--\s*question_id:\s*([A-Za-z0-9_-]+)(.*?)-->")
 A_META = re.compile(r"<!--\s*answer_id:\s*([A-Za-z0-9_-]+)(.*?)-->")
 ATOMIC_ROW = re.compile(r"^\|\s*(AP-[A-Za-z0-9_-]+)\s*\|", re.M)
+KNOWLEDGE_SECTION = re.compile(r"(?ms)^###\s+(AP-[A-Za-z0-9_-]+)｜([^\n]+)\n(.*?)(?=^###\s+AP-|^##\s+|\Z)")
 SOURCE_REF = re.compile(r"(SRC-\d{3})(?:#[^\s，。；;)）]+)?")
-BROKEN_MATH = re.compile(r"\?{2,}|\?[A-Za-z0-9]|[\u200b-\u200d]|[�]")
+BROKEN_MATH = re.compile(
+    r"\?{2,}|\?[A-Za-z0-9]|[\u200b-\u200d\uE000-\uF8FF\uFFFD]"
+    r"|[➢]"
+    r"|[]"
+)
 VISUAL_NOISE = re.compile(
     r"输入0|输出0|-0\.5\s+-0\.5|数据预处理章节|Ø|NO!|分类任务训练数据"
 )
 SKELETON_QUESTION = re.compile(
     r"完整说明.+定义、核心内容和作用|围绕.+逐项完成以下考查要求|结合一个数据挖掘场景，说明如何运用"
+)
+LOW_QUALITY_JUDGMENT = re.compile(r"课程材料未提及以下内容")
+EXAM_TYPE_LEAK = re.compile(r"选择[、，,]?填空|填空[、，,]?判断|判断题|计算题与证明题|•\s*知识点")
+QUESTION_OUTLINE_LEAK = re.compile(
+    r"符合课程材料|课程材料未提及|以下内容与本考点无关|第[一二三四五六七八九十]+章.{0,30}(?:选择|填空|判断|知识点)|"
+    r"(?:选择|填空|判断)题.{0,12}知识点"
 )
 
 
@@ -104,6 +115,32 @@ def validate(task_dir: Path) -> dict:
     question_text = read(task_dir / question_file)
     if SKELETON_QUESTION.search(question_text):
         errors.append("题目.md 仍包含未加工的通用骨架题干")
+    if LOW_QUALITY_JUDGMENT.search(question_text):
+        errors.append("题目.md 包含以‘材料是否提及’代替知识判断的低质量判断题")
+    leaked_question_outline = QUESTION_OUTLINE_LEAK.search(question_text)
+    if leaked_question_outline:
+        errors.append(f"题目.md 把章节目录或‘是否符合材料’当成题干/选项：{leaked_question_outline.group(0)!r}")
+
+    knowledge_text = read(task_dir / "知识点.md")
+    leaked_exam_type = EXAM_TYPE_LEAK.search(knowledge_text)
+    if leaked_exam_type:
+        errors.append(f"知识点.md 混入题型或章节目录文字：{leaked_exam_type.group(0)!r}")
+    for atomic_id, title, body in KNOWLEDGE_SECTION.findall(knowledge_text):
+        requirement = re.search(r"考查要求：\*\*\s*([^\n]+)", body)
+        action = requirement.group(1).strip() if requirement else ""
+        content = re.sub(r">\s*\*\*考查要求：\*\*[^\n]*", "", body).strip()
+        plain = re.sub(r"[#>*`\-\d.\s]", "", content)
+        if len(plain) < 40:
+            errors.append(f"{atomic_id} {title} 内容不足：只有名称或短句，尚不能用于复习")
+            continue
+        if any(key in action for key in ("计算", "证明")):
+            has_rule = re.search(
+                r"[=⇔⇒→∧∨¬∀∃ΣΠ]|步骤|推导|算法|条件|性质|判定|证明|构造|矩阵|"
+                r"当且仅当|充要|次序|排列数|极大元|极小元|选取|合并",
+                content,
+            )
+            if not has_rule:
+                errors.append(f"{atomic_id} {title} 缺少公式、规则或可执行步骤")
     choice_count = len(re.findall(r"【选择】", question_text))
     for label in "ABCD":
         option_count = len(re.findall(rf"(?m)^{label}：.+$", question_text))
@@ -116,19 +153,20 @@ def validate(task_dir: Path) -> dict:
         errors.append(
             f"选择题 Markdown 空行格式错误：{choice_count} 道题，仅 {rendered_breaks} 道可在预览中正确分段"
         )
-    q_matches = list(Q_META.finditer(question_text))
-    q_ids = [m.group(1) for m in q_matches]
+    question_manifest = load_json(task_dir / "question_manifest.json", errors)
+    q_records = question_manifest.get("questions", [])
+    q_ids = [item.get("question_id") for item in q_records if item.get("question_id")]
+    visible_q_ids = re.findall(
+        r"(?m)^####\s+([A-Za-z0-9_-]+)｜(?:选择题|判断题|填空题|简答题|计算题|方案设计题)$",
+        question_text,
+    )
     if question_file in outputs:
         if not q_ids:
-            errors.append(f"{question_file} 未识别到 question_id，无法核验题量和同步")
+            errors.append("question_manifest.json 未识别到 question_id，无法核验题量和同步")
+        if visible_q_ids != q_ids:
+            errors.append(f"{question_file} 的可见题号与 question_manifest.json 不同步")
         for duplicate in duplicates(q_ids):
             errors.append(f"重复 question_id：{duplicate}")
-        blocks = blocks_with_question_ids(question_text)
-        if not blocks:
-            errors.append("无法识别最细知识点/遗漏点下的题目分组")
-        for point, ids in blocks:
-            if len(ids) < minimum:
-                errors.append(f"“{point}”只有 {len(ids)} 题，少于 {minimum} 题")
 
     # A final-exam task with an atomic-point map must prove coverage per atomic ID,
     # rather than merely counting questions under a broad chapter heading.
@@ -145,25 +183,16 @@ def validate(task_dir: Path) -> dict:
             next_heading = re.search(r"^###\s+", knowledge_text[heading.end():], re.M)
             end = heading.end() + next_heading.start() if next_heading else len(knowledge_text)
             block = knowledge_text[heading.end():end]
-            if (
-                "| 考点编号 | 考查要求 | 来源 |" not in block
-                or not (
-                    ("#### 必背内容" in block and "| 要点 | 内容 |" in block)
-                    or ("#### 步骤与计算" in block and re.search(r"(?m)^1\. ", block))
-                )
-            ):
-                errors.append(f"知识点 {atomic_id} 未使用固定结构")
-            content_rows = [
-                line for line in block.splitlines()
-                if line.startswith("| **") and line.count("|") >= 3
-            ]
+            if "> **考查要求：**" not in block or not re.search(r"(?m)^####\s+.+$", block):
+                errors.append(f"知识点 {atomic_id} 未使用‘考查要求＋分块内容’结构")
+            content_rows = re.findall(r"(?m)^- .+$", block)
             numbered_steps = re.findall(r"(?m)^\d+\. .+$", block)
             content = "\n".join(content_rows + numbered_steps)
             if not content.strip():
                 errors.append(f"知识点 {atomic_id} 缺少必背内容")
             if len(content) > 2200:
                 errors.append(f"知识点 {atomic_id} 摘录过长，疑似整页复制")
-        atomic_questions = [m for m in q_matches if meta_value(m, "atomic_id") == atomic_id]
+        atomic_questions = [item for item in q_records if item.get("atomic_id") == atomic_id]
         if len(atomic_questions) < minimum:
             errors.append(f"原子考点 {atomic_id} 只有 {len(atomic_questions)} 题，少于 {minimum} 题")
     if atomic_ids and len(q_ids) < len(atomic_ids) * minimum:
@@ -184,25 +213,25 @@ def validate(task_dir: Path) -> dict:
         if mapped_ids != atomic_ids:
             errors.append("atomic_points.md 与 atomic_map.json 的原子点 ID 或顺序不一致")
         parents = {item.get("parent") for item in atomic_map.get("atoms", [])}
-        expected_parents = {f"P{i:02d}" for i in range(1, 20)}
-        missing_parents = sorted(expected_parents - parents)
-        if missing_parents:
-            errors.append(f"原子点未覆盖全部大纲条目：{', '.join(missing_parents)}")
+        expected_parents = set(atomic_map.get("outline_parents", []))
+        if expected_parents:
+            missing_parents = sorted(expected_parents - parents)
+            if missing_parents:
+                errors.append(f"原子点未覆盖全部大纲条目：{', '.join(missing_parents)}")
 
     if mode == "final_exam" and category != "language":
         answer_text = read(task_dir / "答案.md")
-        answer_matches = list(A_META.finditer(answer_text))
-        answer_ids = [m.group(1) for m in answer_matches]
+        answer_ids = re.findall(
+            r"(?m)^####\s+([A-Za-z0-9_-]+)｜(?:选择题|判断题|填空题|简答题|计算题|方案设计题)$",
+            answer_text,
+        )
         if q_ids != answer_ids:
             errors.append("题目与答案的稳定 ID 或顺序不一致")
-        answer_headings = re.findall(r"(?m)^####\s+([A-Za-z0-9_-]+)｜(?:选择题|判断题|填空题|简答题|计算题)$", answer_text)
+        answer_headings = answer_ids
         if answer_headings != answer_ids:
             errors.append("答案未按 question_id｜题型 使用独立标题，或标题顺序不一致")
         if re.search(r"(?m)^[123]\.\s+\*\*(?:答案|结论|参考答案|计算过程)", answer_text):
             errors.append("答案仍使用循环的 1、2、3 编号")
-        for q_match, a_match in zip(q_matches, answer_matches):
-            if meta_value(q_match, "atomic_id") != meta_value(a_match, "atomic_id"):
-                errors.append(f"题目与答案 atomic_id 不一致：{q_match.group(1)}")
     if category == "language":
         summary = read(task_dir / "复习总结.md")
         missing = [x for x in ("词汇语法", "阅读", "翻译", "写作") if x not in summary]
@@ -212,11 +241,18 @@ def validate(task_dir: Path) -> dict:
         outline = read(task_dir / "提纲.md")
         if "已考点" not in outline or "遗漏点" not in outline:
             errors.append("竞赛提纲必须同时包含已考点和遗漏点")
-    if "思维导图.md" in outputs and "mindmap" not in read(task_dir / "思维导图.md"):
-        errors.append("思维导图.md 缺少 Mermaid mindmap")
+    if "思维导图.md" in outputs:
+        mindmap_text = read(task_dir / "思维导图.md")
+        if "![" not in mindmap_text or not (task_dir / "思维导图.png").exists():
+            errors.append("思维导图.md 未嵌入可直接查看的思维导图图片")
 
     all_text = "\n".join(read(task_dir / filename) for filename in outputs)
-    broken = BROKEN_MATH.search(all_text)
+    normalized_sources = "\n".join(
+        read(task_dir / item["normalized_path"])
+        for item in manifest.get("sources", [])
+        if item.get("normalized_path")
+    )
+    broken = BROKEN_MATH.search(all_text + "\n" + normalized_sources)
     if broken:
         errors.append(f"正式产物包含未处理的 PDF 公式乱码：{broken.group(0)!r}")
     visual_noise = VISUAL_NOISE.search(all_text)
@@ -245,7 +281,7 @@ def validate(task_dir: Path) -> dict:
         if expected_total and len(q_ids) != expected_total:
             errors.append(f"官方题型蓝图总题数需要 {expected_total}，实际 {len(q_ids)}")
 
-    levels = [meta_value(m, "difficulty") for m in q_matches if meta_value(m, "difficulty")]
+    levels = [item.get("difficulty") for item in q_records if item.get("difficulty")]
     if levels and not blueprint:
         total = len(levels)
         target = lock.get("rules", {}).get("difficulty_ratio", {})

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560" role="img" aria-labelledby="title desc">
+  <title id="title">Final Exam Prep 考点驱动工作流</title>
+  <desc id="desc">考试范围进入考点引擎，经拆分、检索、生成和校验后输出知识点、思维导图、题目、答案与覆盖矩阵。</desc>
+  <rect width="1400" height="560" fill="#F4F1E9"/>
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+    <circle cx="62" cy="48" r="5" fill="#C43E18"/>
+    <text x="82" y="53" font-size="13" letter-spacing="2" fill="#817C74">FINAL EXAM PREP / WORKFLOW</text>
+
+    <text x="62" y="125" font-size="42" font-weight="700" fill="#191714">范围进入，结果带着证据离开</text>
+    <text x="62" y="165" font-size="18" fill="#817C74">考试目标决定资料检索；质量门禁决定最终交付。</text>
+
+    <!-- Input sheet -->
+    <g transform="translate(72 225) rotate(-3 120 120)">
+      <rect x="0" y="0" width="245" height="240" fill="#FFFEFA" stroke="#CEC7BB" stroke-width="2"/>
+      <rect x="0" y="0" width="9" height="240" fill="#191714"/>
+      <text x="34" y="45" font-size="12" letter-spacing="2" fill="#C43E18">INPUT</text>
+      <text x="34" y="84" font-size="26" font-weight="700" fill="#191714">考试范围</text>
+      <line x1="34" y1="115" x2="201" y2="115" stroke="#CEC7BB" stroke-width="3"/>
+      <line x1="34" y1="142" x2="218" y2="142" stroke="#CEC7BB" stroke-width="3"/>
+      <line x1="34" y1="169" x2="173" y2="169" stroke="#CEC7BB" stroke-width="3"/>
+      <line x1="34" y1="196" x2="205" y2="196" stroke="#C43E18" stroke-width="4"/>
+    </g>
+
+    <!-- Retrieval stream -->
+    <path d="M330 348 C390 348 402 290 462 290 C505 290 515 318 548 318" fill="none" stroke="#CEC7BB" stroke-width="3"/>
+    <path d="M330 371 C414 371 419 430 506 430 C536 430 548 407 568 396" fill="none" stroke="#C43E18" stroke-width="5"/>
+    <circle cx="390" cy="347" r="6" fill="#C43E18"/>
+    <circle cx="459" cy="291" r="6" fill="#191714"/>
+    <circle cx="507" cy="430" r="6" fill="#C43E18"/>
+
+    <!-- Atomic-point engine -->
+    <circle cx="690" cy="355" r="128" fill="none" stroke="#CEC7BB" stroke-width="2" stroke-dasharray="5 10"/>
+    <circle cx="690" cy="355" r="82" fill="#191714"/>
+    <circle cx="690" cy="355" r="82" fill="none" stroke="#C43E18" stroke-width="5"/>
+    <text x="690" y="342" text-anchor="middle" font-size="27" font-weight="700" fill="#FFFEFA">考点引擎</text>
+    <text x="690" y="374" text-anchor="middle" font-size="14" letter-spacing="2" fill="#CEC7BB">ATOMIC CORE</text>
+    <text x="690" y="404" text-anchor="middle" font-size="14" fill="#FFFEFA">范围 → 证据 → 训练</text>
+
+    <g font-size="15" font-weight="700" text-anchor="middle">
+      <circle cx="690" cy="227" r="28" fill="#C43E18"/><text x="690" y="233" fill="#FFFEFA">拆分</text>
+      <circle cx="818" cy="355" r="28" fill="#FFFEFA" stroke="#191714" stroke-width="2"/><text x="818" y="361" fill="#191714">检索</text>
+      <circle cx="690" cy="483" r="28" fill="#FFFEFA" stroke="#191714" stroke-width="2"/><text x="690" y="489" fill="#191714">生成</text>
+      <circle cx="562" cy="355" r="28" fill="#FFFEFA" stroke="#C43E18" stroke-width="2"/><text x="562" y="361" fill="#C43E18">校验</text>
+    </g>
+
+    <!-- Evidence paths to outputs -->
+    <path d="M846 310 C900 268 935 238 995 238" fill="none" stroke="#C43E18" stroke-width="5"/>
+    <path d="M853 349 C912 349 939 330 995 330" fill="none" stroke="#191714" stroke-width="3"/>
+    <path d="M846 399 C908 439 935 431 995 431" fill="none" stroke="#CEC7BB" stroke-width="3"/>
+    <circle cx="906" cy="269" r="6" fill="#C43E18"/>
+    <circle cx="930" cy="344" r="5" fill="#191714"/>
+    <circle cx="909" cy="427" r="5" fill="#C43E18"/>
+
+    <!-- Outputs as editorial list, not cards -->
+    <text x="1018" y="213" font-size="12" letter-spacing="2" fill="#C43E18">VERIFIED OUTPUT</text>
+    <g fill="#191714">
+      <text x="1018" y="257" font-size="26" font-weight="700">知识点</text>
+      <text x="1170" y="257" font-size="26" font-weight="700">思维导图</text>
+      <line x1="1018" y1="278" x2="1328" y2="278" stroke="#CEC7BB" stroke-width="2"/>
+      <text x="1018" y="349" font-size="26" font-weight="700">训练题</text>
+      <text x="1170" y="349" font-size="26" font-weight="700">答案解析</text>
+      <line x1="1018" y1="370" x2="1328" y2="370" stroke="#CEC7BB" stroke-width="2"/>
+      <text x="1018" y="440" font-size="26" font-weight="700">覆盖矩阵</text>
+      <text x="1170" y="440" font-size="16" fill="#817C74">范围 · 来源 · 题量</text>
+    </g>
+    <path d="M1308 422 l18 18 36-44" fill="none" stroke="#C43E18" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+
+    <text x="1338" y="520" text-anchor="end" font-size="12" letter-spacing="1.5" fill="#A7A198">SCOPE IN / EVIDENCE OUT</text>
+  </g>
+</svg>

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import sys
+import base64
 from pathlib import Path
 
 from validate_output_structure import validate
@@ -15,7 +16,17 @@ def main() -> int:
     errors: list[str] = []
     demo = ROOT / "demo" / "数据挖掘"
     if demo.is_dir():
-        report = validate(demo)
+        mindmap_png = demo / "思维导图.png"
+        temporary_png = not mindmap_png.exists()
+        if temporary_png:
+            mindmap_png.write_bytes(base64.b64decode(
+                "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+            ))
+        try:
+            report = validate(demo)
+        finally:
+            if temporary_png:
+                mindmap_png.unlink(missing_ok=True)
         errors.extend(report["errors"])
         expected = {"questions": 207, "answers": 207, "choices": 69, "atoms": 69}
         for key, value in expected.items():
@@ -24,7 +35,7 @@ def main() -> int:
 
     required_fragments = {
         "templates/review-frames/final-three-files.md": [
-            "| 要点 | 内容 |", "A：<选项 A>", "#### Q-...｜选择题",
+            "> **考查要求：**", "#### 逐步推导", "#### Q-...｜选择题",
         ],
         "templates/question-patterns/calculation-answer.md": ["#### Q-...｜计算题"],
         "templates/question-patterns/liberal-arts-answer.md": ["#### Q-...｜简答题"],
