@@ -6,6 +6,8 @@
 <!-- question_id: LQ-... type: choice source: generated -->
 【选择】<题干>
 
+> **考查要求：** <识记/辨析/定位/表达>
+
 A：<选项 A>
 
 B：<选项 B>

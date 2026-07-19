@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "task": "离散数学",
+  "sources": [
+    {
+      "source_id": "SRC-001",
+      "original_name": "用户提供的课程名称",
+      "stored_path": "sources/SRC-001-用户提供的课程名称.md",
+      "normalized_path": "sources/SRC-001-用户提供的课程名称.md",
+      "sha256": "9d65481498ac6ff98bdf6494662b62aacb7f420a39e7002cc9e4a20aabc4ef55",
+      "status": "parsed",
+      "kind": "user_text",
+      "role": "primary",
+      "course_match": "user_declared",
+      "imported_at": "2026-07-18T09:37:01.660835+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-002",
+      "original_name": "离散复习.pdf",
+      "stored_path": "sources/SRC-002-离散复习.pdf",
+      "normalized_path": "sources/SRC-002.md",
+      "sha256": "5f9b0d97b764d2d672263bb60c631004144e85383d1e8c0c04737874b9586eeb",
+      "status": "parsed",
+      "imported_at": "2026-07-18T09:37:56.870614+00:00",
+      "error": null
+    },
+    {
+      "source_id": "SRC-003",
+      "original_name": "用户说明材料情况",
+      "stored_path": "sources/SRC-003-用户说明材料情况.md",
+      "normalized_path": "sources/SRC-003-用户说明材料情况.md",
+      "sha256": "e42d87e67a80dad2c27f6ff877d29485589c1f77b437ec98cde937c8e63fabba",
+      "status": "parsed",
+      "kind": "user_text",
+      "role": "primary",
+      "course_match": "user_declared",
+      "imported_at": "2026-07-18T09:45:24.165029+00:00",
+      "error": null
+    }
+  ],
+  "conflicts": []
+}

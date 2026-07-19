@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+
+# Runtime-only verification artifacts
+tmp/
+tmp_pdf_check/
+.gif-check/
+

@@ -12,6 +12,7 @@ import sys
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
+from pdf_symbol_normalizer import normalize_pdf_symbols
 
 TEXT = {".md", ".txt", ".csv", ".tsv", ".html", ".htm"}
 IMAGES = {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
@@ -90,11 +91,12 @@ def extract_text(path: Path, output: Path) -> tuple[str, str | None]:
     # PDF text extractors occasionally return isolated UTF-16 surrogate code points.
     # Replace only unencodable fragments so the rest of the extracted material remains usable.
     text = text.encode("utf-8", errors="replace").decode("utf-8")
+    text = normalize_pdf_symbols(text)
     output.write_text(text, encoding="utf-8")
     return "parsed", None
 
 
-def import_one(task_dir: Path, source: Path, manifest: dict) -> list[dict]:
+def import_one(task_dir: Path, source: Path, manifest: dict, metadata_only: bool = False) -> list[dict]:
     if not source.is_file():
         raise ValueError(f"文件不存在：{source}")
     source_hash = digest(source)
@@ -115,10 +117,13 @@ def import_one(task_dir: Path, source: Path, manifest: dict) -> list[dict]:
         manifest["sources"].append(record)
         records = [record]
         for child in files:
-            records.extend(import_one(task_dir, child, manifest))
+            records.extend(import_one(task_dir, child, manifest, metadata_only=metadata_only))
         return records
     normalized = task_dir / "sources" / f"{source_id}.md"
-    status, error = extract_text(stored, normalized)
+    if metadata_only and source.suffix.lower() not in TEXT:
+        status, error = "indexed_only", None
+    else:
+        status, error = extract_text(stored, normalized)
     record = {
         "source_id": source_id,
         "original_name": source.name,
@@ -137,6 +142,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("task_dir")
     parser.add_argument("sources", nargs="+")
+    parser.add_argument(
+        "--metadata-only",
+        action="store_true",
+        help="Copy and index binary materials without converting their full contents to Markdown.",
+    )
     args = parser.parse_args()
     task_dir = Path(args.task_dir).resolve()
     manifest_path = task_dir / "source_manifest.json"
@@ -146,7 +156,7 @@ def main() -> int:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         imported = []
         for value in args.sources:
-            imported.extend(import_one(task_dir, Path(value).resolve(), manifest))
+            imported.extend(import_one(task_dir, Path(value).resolve(), manifest, metadata_only=args.metadata_only))
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     except (OSError, ValueError, json.JSONDecodeError, zipfile.BadZipFile) as exc:
         print(f"[import-sources] ERROR: {exc}", file=sys.stderr)

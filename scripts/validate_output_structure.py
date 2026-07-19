@@ -8,10 +8,11 @@ import json
 import re
 from pathlib import Path
 
-Q_META = re.compile(r"<!--\s*question_id:\s*([A-Za-z0-9_-]+).*?-->")
-A_META = re.compile(r"<!--\s*answer_id:\s*([A-Za-z0-9_-]+).*?-->")
 ANSWER_HEADING = re.compile(
-    r"(?m)^####\s+([A-Za-z0-9_-]+)｜(?:选择题|判断题|填空题|简答题|计算题|答案)$"
+    r"(?m)^####\s+([A-Za-z0-9_-]+)｜(?:选择题|判断题|填空题|简答题|计算题|方案设计题|答案)$"
+)
+QUESTION_HEADING = re.compile(
+    r"(?m)^####\s+([A-Za-z0-9_-]+)｜(?:选择题|判断题|填空题|简答题|计算题|方案设计题)$"
 )
 BAD_CONTENT = re.compile(
     r"\?{2,}|\?[A-Za-z0-9]|[\u200b-\u200d]|[�]|"
@@ -20,6 +21,10 @@ BAD_CONTENT = re.compile(
 SKELETON = re.compile(
     r"完整说明.+定义、核心内容和作用|围绕.+逐项完成以下考查要求|"
     r"结合一个数据挖掘场景，说明如何运用"
+)
+PACKED_POINTS = re.compile(
+    r"(?m)^.*(?:①[^\n]*②|第一[^\n]*第二[^\n]*第三|步骤一[^\n]*步骤二|"
+    r"(?:•[^\n]*){2,}|(?:➢[^\n]*){2,}).*$"
 )
 
 
@@ -60,6 +65,9 @@ def validate(task_dir: Path) -> dict:
         errors.append("正式产物包含公式乱码、图表标签或幻灯片残留")
     if SKELETON.search(combined):
         errors.append("正式产物包含未加工的通用题目骨架")
+    packed = PACKED_POINTS.search(combined)
+    if packed:
+        errors.append(f"正式产物把多个要点或步骤挤在同一行：{packed.group(0)[:100]}")
 
     mode = lock.get("task", {}).get("mode")
     category = lock.get("task", {}).get("category")
@@ -69,14 +77,18 @@ def validate(task_dir: Path) -> dict:
     answer_text = read(task_dir / answer_name)
     choices = validate_choice_layout(question_text, errors, question_name)
 
-    q_ids = Q_META.findall(question_text)
-    a_ids = A_META.findall(answer_text)
-    if a_ids and q_ids != a_ids:
+    try:
+        question_manifest = json.loads((task_dir / "question_manifest.json").read_text(encoding="utf-8"))
+        q_ids = [item.get("question_id") for item in question_manifest.get("questions", [])]
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"question_manifest.json 无法解析：{exc}")
+        q_ids = []
+    visible_q_ids = QUESTION_HEADING.findall(question_text)
+    a_ids = ANSWER_HEADING.findall(answer_text)
+    if visible_q_ids != q_ids:
+        errors.append("题目可见 ID 与 question_manifest.json 不一致")
+    if q_ids != a_ids:
         errors.append("题目与答案 ID 或顺序不一致")
-    if a_ids:
-        headings = ANSWER_HEADING.findall(answer_text)
-        if headings != a_ids:
-            errors.append("答案没有逐题使用 question_id｜题型 独立标题")
     if re.search(r"(?m)^[123]\.\s+\*\*(?:答案|结论|参考答案|计算过程)", answer_text):
         errors.append("答案仍使用循环的 1、2、3 编号")
 
@@ -91,10 +103,12 @@ def validate(task_dir: Path) -> dict:
             later = re.search(r"(?m)^###\s+", knowledge[match.end():])
             end = match.end() + later.start() if later else len(knowledge)
             block = knowledge[match.end():end]
-            conceptual = "#### 必背内容" in block and "| 要点 | 内容 |" in block
-            procedural = "#### 步骤与计算" in block and re.search(r"(?m)^1\. ", block)
-            if not (conceptual or procedural):
-                errors.append(f"{atomic_id} 未使用概念表格或步骤计算结构")
+            has_requirement = "> **考查要求：**" in block
+            has_content = bool(re.search(r"(?m)^####\s+.+$", block)) and bool(
+                re.search(r"(?m)^(?:- |\d+\. )", block)
+            )
+            if not (has_requirement and has_content):
+                errors.append(f"{atomic_id} 未使用‘考查要求＋分块内容’结构")
 
     if category == "language":
         summary = read(task_dir / "复习总结.md")

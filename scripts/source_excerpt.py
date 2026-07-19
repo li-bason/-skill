@@ -12,6 +12,10 @@ GENERIC = {
 CORRUPT = re.compile(
     r"\?{2,}|\?[A-Za-z0-9]|[\u200b-\u200d]|[�]|Ø|NO!|分类任务训练数据"
 )
+OUTLINE_NOISE = re.compile(
+    r"选择[、，,]?填空|填空[、，,]?判断|判断题|计算题|证明题|(?:^|\s)知识点(?:\s|$)|"
+    r"第[一二三四五六七八九十]+章.{0,20}(?:知识点|选择|填空)"
+)
 
 
 def sentences(page_texts: list[str]) -> list[str]:
@@ -48,7 +52,7 @@ def select(page_texts: list[str], title: str, action: str, limit: int = 6) -> li
     keys = keywords(title, action)
     scored: list[tuple[int, int, str]] = []
     for index, sentence in enumerate(candidates):
-        if CORRUPT.search(sentence):
+        if CORRUPT.search(sentence) or OUTLINE_NOISE.search(sentence):
             continue
         score = sum(len(key) ** 2 for key in keys if key in sentence)
         if title in sentence:

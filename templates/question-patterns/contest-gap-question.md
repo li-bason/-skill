@@ -2,6 +2,8 @@
 
 ```markdown
 ### <GAP-ID> <遗漏点>
+> **考查要求：** <识记/推理/计算/应用>
+
 <!-- question_id: CQ-... difficulty: basic|medium|advanced source: generated -->
 #### CQ-...｜题目
 
