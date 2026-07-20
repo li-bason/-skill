@@ -1,6 +1,6 @@
 interface:
-  display_name: "Final Exam Prep"
-  short_description: "从教材、大纲和题型生成可持续更新的复习资料"
-  default_prompt: "Use $final-exam-prep to organize my course materials into an exam review plan, notes, mind map, questions, and answers."
+  display_name: "StudyForge"
+  short_description: "把学习输入锻造成可追溯、可更新、可验证的知识资产"
+  default_prompt: "Use $study-forge to turn my materials and learning goals into structured, traceable, incrementally updated learning assets."
 policy:
   allow_implicit_invocation: true

@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560" role="img" aria-labelledby="title desc">
-  <title id="title">Final Exam Prep 考点驱动工作流</title>
+  <title id="title">StudyForge 学习资产工作流</title>
   <desc id="desc">考试范围进入考点引擎，经拆分、检索、生成和校验后输出知识点、思维导图、题目、答案与覆盖矩阵。</desc>
   <rect width="1400" height="560" fill="#F4F1E9"/>
   <g font-family="Microsoft YaHei, PingFang SC, sans-serif">
     <circle cx="62" cy="48" r="5" fill="#C43E18"/>
-    <text x="82" y="53" font-size="13" letter-spacing="2" fill="#817C74">FINAL EXAM PREP / WORKFLOW</text>
+    <text x="82" y="53" font-size="13" letter-spacing="2" fill="#817C74">STUDYFORGE / LEARNING ASSET WORKFLOW</text>
 
     <text x="62" y="125" font-size="42" font-weight="700" fill="#191714">范围进入，结果带着证据离开</text>
     <text x="62" y="165" font-size="18" fill="#817C74">考试目标决定资料检索；质量门禁决定最终交付。</text>

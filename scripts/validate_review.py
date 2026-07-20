@@ -153,14 +153,18 @@ def validate(task_dir: Path) -> dict:
         errors.append(
             f"选择题 Markdown 空行格式错误：{choice_count} 道题，仅 {rendered_breaks} 道可在预览中正确分段"
         )
-    question_manifest = load_json(task_dir / "question_manifest.json", errors)
-    q_records = question_manifest.get("questions", [])
+    question_enabled = question_file in outputs
+    if question_enabled:
+        question_manifest = load_json(task_dir / "question_manifest.json", errors)
+        q_records = question_manifest.get("questions", [])
+    else:
+        q_records = []
     q_ids = [item.get("question_id") for item in q_records if item.get("question_id")]
     visible_q_ids = re.findall(
         r"(?m)^####\s+([A-Za-z0-9_-]+)｜(?:选择题|判断题|填空题|简答题|计算题|方案设计题)$",
         question_text,
     )
-    if question_file in outputs:
+    if question_enabled:
         if not q_ids:
             errors.append("question_manifest.json 未识别到 question_id，无法核验题量和同步")
         if visible_q_ids != q_ids:
@@ -233,10 +237,53 @@ def validate(task_dir: Path) -> dict:
         if re.search(r"(?m)^[123]\.\s+\*\*(?:答案|结论|参考答案|计算过程)", answer_text):
             errors.append("答案仍使用循环的 1、2、3 编号")
     if category == "language":
-        summary = read(task_dir / "复习总结.md")
-        missing = [x for x in ("词汇语法", "阅读", "翻译", "写作") if x not in summary]
-        if missing:
-            errors.append(f"复习总结缺少板块：{'、'.join(missing)}")
+        language_index = load_json(task_dir / "language_index.json", errors)
+        if language_index and not all(key in language_index for key in ("vocabulary", "translations", "writing")):
+            errors.append("language_index.json 缺少三表联动索引")
+        language_tables = {
+            "词汇语法积累表.md": ("词条", "词性", "英文释义", "搭配与用法", "例句", "同义词/近义词"),
+            "翻译积累表.md": ("方向", "原句", "语义拆分", "关键表达", "译文", "翻译说明"),
+            "写作积累表.md": ("英文句子", "中文含义", "句型结构", "可替换部分"),
+        }
+        for filename, columns in language_tables.items():
+            table = read(task_dir / filename)
+            missing = [column for column in columns if column not in table]
+            if missing:
+                errors.append(f"{filename} 缺少字段：{'、'.join(missing)}")
+        vocab = read(task_dir / "词汇语法积累表.md")
+        if re.search(r"(?im)^\|\s*ID\s*\||<th>\s*ID\s*</th>", vocab):
+            errors.append("语言积累表不应包含无实际关联作用的 ID 列")
+        translation = read(task_dir / "翻译积累表.md")
+        writing = read(task_dir / "写作积累表.md")
+        if re.search(r"(?im)^\|\s*ID\s*\||<th>\s*ID\s*</th>", translation + "\n" + writing):
+            errors.append("语言积累表不应包含无实际关联作用的 ID 列")
+        if re.search(r"(?i)<(?:table|tr|td|th)\b", vocab + "\n" + translation + "\n" + writing):
+            errors.append("语言积累表必须使用纯 Markdown，不能使用 HTML 表格")
+        vocab_keys = [value.strip().casefold() for value in re.findall(
+            r"(?m)^##\s+词条：(.+?)\s*$", vocab
+        )]
+        repeated_vocab = duplicates([key for key in vocab_keys if key])
+        if repeated_vocab:
+            errors.append(f"词汇表存在重复词条分组：{', '.join(repeated_vocab)}")
+        translation_keys = [value.strip().casefold() for value in re.findall(
+            r"(?m)^##\s+原句：(.+?)\s*$", translation
+        )]
+        repeated_translation = duplicates([key for key in translation_keys if key])
+        if repeated_translation:
+            errors.append(f"翻译表存在重复原句分组：{', '.join(repeated_translation)}")
+        writing_keys = []
+        for line in writing.splitlines():
+            if not line.startswith("|") or re.match(r"^\|\s*(?:英文句子|-)", line):
+                continue
+            cells = [cell.strip().casefold() for cell in line.strip("|").split("|")]
+            if cells and cells[0]:
+                writing_keys.append(cells[0])
+        repeated_writing = duplicates(writing_keys)
+        if repeated_writing:
+            errors.append(f"写作表存在重复英文句子：{', '.join(repeated_writing)}")
+        forbidden = [name for name in ("阅读.md", "题目.md", "答案.md", "思维导图.md") if name in outputs]
+        if forbidden:
+            errors.append(f"语言积累任务包含禁止产物：{'、'.join(forbidden)}")
     if mode == "contest":
         outline = read(task_dir / "提纲.md")
         if "已考点" not in outline or "遗漏点" not in outline:

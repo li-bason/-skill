@@ -35,3 +35,7 @@
 ```
 
 合同一经确认，后续不得静默改变输出列表、模板、最低题量或任务分类。
+
+语言积累任务使用三个输出：`词汇语法积累表.md`、`翻译积累表.md`、`写作积累表.md`；规则中
+设置 `minimum_questions_per_point: 0`、`accumulation_only: true`，且模板选择
+`language-accumulation-v1`。语言任务不声明题目、答案、阅读或思维导图产物。

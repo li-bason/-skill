@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create or inspect stable final-exam-prep task directories."""
+"""Create or inspect stable StudyForge task directories."""
 
 from __future__ import annotations
 
@@ -17,13 +17,13 @@ FINAL_OUTPUTS = {
     "liberal-arts": ["atomic_points.md", "知识点.md", "思维导图.md", "题目.md", "答案.md"],
     "science": ["atomic_points.md", "知识点.md", "思维导图.md", "题目.md", "答案.md"],
     "engineering": ["atomic_points.md", "知识点.md", "思维导图.md", "题目.md", "答案.md"],
-    "language": ["复习总结.md", "思维导图.md"],
+    "language": ["词汇语法积累表.md", "翻译积累表.md", "写作积累表.md"],
 }
 TEMPLATES = {
     "liberal-arts": ("final-three-files-v1", "liberal-arts-v1", "liberal-arts-answer-v1"),
     "science": ("final-three-files-v1", "science-v1", "calculation-answer-v1"),
     "engineering": ("final-three-files-v1", "engineering-v1", "calculation-answer-v1"),
-    "language": ("language-summary-v1", "language-v1", "language-practice-v1"),
+    "language": ("language-summary-v1", "language-v1", "language-accumulation-v1"),
     "contest-general": ("contest-gap-training-v1", "contest-general-v1", "contest-gap-question-v1"),
 }
 
@@ -68,11 +68,12 @@ def build_lock(mode: str, name: str, category: str, task_dir: Path, outputs: lis
         "outputs": outputs,
         "rules": {
             "full_pipeline_required": True,
-            "minimum_questions_per_point": 3,
+            "minimum_questions_per_point": 0 if category == "language" else 3,
             "difficulty_ratio": {"basic": 0.4, "medium": 0.4, "advanced": 0.2},
             "stable_ids": True,
             "source_attribution": True,
             "update_mode": "incremental_with_reorganize",
+            "accumulation_only": category == "language",
         },
         "status": "draft_pending_user_confirmation",
     }
@@ -85,7 +86,7 @@ def initialize(mode: str, name: str, category: str | None, directory: str | None
         try:
             custom_dir.relative_to(SKILL_ROOT.resolve())
         except ValueError as exc:
-            raise ValueError("--directory 必须位于 final-exam-prep skill 根目录内") from exc
+            raise ValueError("--directory 必须位于 study-forge skill 根目录内") from exc
     if mode == "final":
         if category not in FINAL_OUTPUTS:
             raise ValueError(f"分类必须是：{', '.join(FINAL_OUTPUTS)}")
@@ -117,8 +118,8 @@ def initialize(mode: str, name: str, category: str | None, directory: str | None
 ## Output Plan
 - {chr(10).join(outputs)}
 
-## Question Strategy
-- 难度比例：基础 40% / 中等 40% / 综合 20%
+## Question / Accumulation Strategy
+- {"只做词汇语法、翻译和写作句子积累；每次确认后写入" if actual_category == "language" else "难度比例：基础 40% / 中等 40% / 综合 20%"}
 
 ## Source & Update Policy
 - 所有材料登记到 source_manifest.json
@@ -139,6 +140,13 @@ def initialize(mode: str, name: str, category: str | None, directory: str | None
     for filename in outputs:
         if write_missing(task_dir / filename, f"# {Path(filename).stem}\n"):
             created.append(filename)
+    if actual_category == "language":
+        language_index = {"version": 1, "vocabulary": {}, "translations": {}, "writing": {}}
+        if write_missing(
+            task_dir / "language_index.json",
+            json.dumps(language_index, ensure_ascii=False, indent=2) + "\n",
+        ):
+            created.append("language_index.json")
     return {"task_dir": str(task_dir), "created": created}
 
 

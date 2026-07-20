@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert final-exam-prep Markdown artifacts to same-directory PDFs."""
+"""Convert StudyForge Markdown artifacts to same-directory PDFs."""
 
 from __future__ import annotations
 
@@ -16,7 +16,9 @@ DELIVERABLES = {
     "思维导图.md",
     "题目.md",
     "答案.md",
-    "复习总结.md",
+    "词汇语法积累表.md",
+    "翻译积累表.md",
+    "写作积累表.md",
     "提纲.md",
     "新题答案.md",
 }
