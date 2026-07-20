@@ -1,1 +1,1 @@
-"""Development utilities for final-exam-prep."""
+"""Development utilities for StudyForge."""

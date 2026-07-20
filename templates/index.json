@@ -15,7 +15,7 @@
   "question_patterns": {
     "liberal-arts-answer-v1": "question-patterns/liberal-arts-answer.md",
     "calculation-answer-v1": "question-patterns/calculation-answer.md",
-    "language-practice-v1": "question-patterns/language-practice.md",
+    "language-accumulation-v1": "question-patterns/language-accumulation.md",
     "contest-gap-question-v1": "question-patterns/contest-gap-question.md"
   }
 }

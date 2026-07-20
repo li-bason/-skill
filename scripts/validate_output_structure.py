@@ -77,20 +77,24 @@ def validate(task_dir: Path) -> dict:
     answer_text = read(task_dir / answer_name)
     choices = validate_choice_layout(question_text, errors, question_name)
 
-    try:
-        question_manifest = json.loads((task_dir / "question_manifest.json").read_text(encoding="utf-8"))
-        q_ids = [item.get("question_id") for item in question_manifest.get("questions", [])]
-    except (OSError, json.JSONDecodeError) as exc:
-        errors.append(f"question_manifest.json 无法解析：{exc}")
+    if question_name in outputs or answer_name in outputs:
+        try:
+            question_manifest = json.loads((task_dir / "question_manifest.json").read_text(encoding="utf-8"))
+            q_ids = [item.get("question_id") for item in question_manifest.get("questions", [])]
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"question_manifest.json 无法解析：{exc}")
+            q_ids = []
+        visible_q_ids = QUESTION_HEADING.findall(question_text)
+        a_ids = ANSWER_HEADING.findall(answer_text)
+        if visible_q_ids != q_ids:
+            errors.append("题目可见 ID 与 question_manifest.json 不一致")
+        if q_ids != a_ids:
+            errors.append("题目与答案 ID 或顺序不一致")
+        if re.search(r"(?m)^[123]\.\s+\*\*(?:答案|结论|参考答案|计算过程)", answer_text):
+            errors.append("答案仍使用循环的 1、2、3 编号")
+    else:
         q_ids = []
-    visible_q_ids = QUESTION_HEADING.findall(question_text)
-    a_ids = ANSWER_HEADING.findall(answer_text)
-    if visible_q_ids != q_ids:
-        errors.append("题目可见 ID 与 question_manifest.json 不一致")
-    if q_ids != a_ids:
-        errors.append("题目与答案 ID 或顺序不一致")
-    if re.search(r"(?m)^[123]\.\s+\*\*(?:答案|结论|参考答案|计算过程)", answer_text):
-        errors.append("答案仍使用循环的 1、2、3 编号")
+        a_ids = []
 
     atoms = re.findall(r"(?m)^\|\s*(AP-[A-Za-z0-9_-]+)\s*\|", read(task_dir / "atomic_points.md"))
     if mode == "final_exam" and category not in {"language", None}:
@@ -111,10 +115,9 @@ def validate(task_dir: Path) -> dict:
                 errors.append(f"{atomic_id} 未使用‘考查要求＋分块内容’结构")
 
     if category == "language":
-        summary = read(task_dir / "复习总结.md")
-        for heading in ("词汇语法", "阅读", "翻译", "写作"):
-            if not re.search(rf"(?m)^##\s+{heading}\b", summary):
-                errors.append(f"语言总结缺少 {heading}")
+        required = ("词汇语法积累表.md", "翻译积累表.md", "写作积累表.md")
+        if tuple(outputs) != required:
+            errors.append("语言任务输出必须是三个独立积累表")
 
     return {
         "valid": not errors,

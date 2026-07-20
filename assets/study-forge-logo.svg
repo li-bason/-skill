@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">StudyForge.skill Logo</title>
+  <desc id="desc">Four learning inputs converging into a verified and reusable asset.</desc>
+  <rect width="128" height="128" rx="20" fill="#F4F1E9"/>
+  <rect x="26" y="26" width="34" height="34" rx="4" fill="#191714"/>
+  <rect x="68" y="26" width="34" height="34" rx="4" fill="#C43E18"/>
+  <rect x="26" y="68" width="34" height="34" rx="4" fill="#C43E18"/>
+  <rect x="68" y="68" width="34" height="34" rx="4" fill="#191714"/>
+  <path d="M45 81l13 13 31-37" fill="none" stroke="#F4F1E9" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>

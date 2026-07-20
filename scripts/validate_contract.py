@@ -34,6 +34,14 @@ def validate(path: Path) -> dict:
         errors.append("rules.full_pipeline_required 必须为 true；触发 skill 后必须执行完整流程")
     if not isinstance(rules.get("minimum_questions_per_point"), int):
         errors.append("rules.minimum_questions_per_point 必须是整数")
+    if task.get("category") == "language":
+        expected = {"词汇语法积累表.md", "翻译积累表.md", "写作积累表.md"}
+        if set(data.get("outputs", [])) != expected:
+            errors.append("语言任务必须且只能输出三个独立积累表")
+        if rules.get("minimum_questions_per_point") != 0:
+            errors.append("语言积累任务 minimum_questions_per_point 必须为 0")
+        if rules.get("accumulation_only") is not True:
+            errors.append("语言任务必须启用 accumulation_only")
     ratio = rules.get("difficulty_ratio", {})
     if set(ratio) != {"basic", "medium", "advanced"} or abs(sum(ratio.values()) - 1) > 1e-6:
         errors.append("difficulty_ratio 必须包含 basic/medium/advanced 且合计为 1")

@@ -9,7 +9,7 @@
 | liberal-arts | `final-three-files.md` | `liberal-arts.md` | `liberal-arts-answer.md` |
 | science | `final-three-files.md` | `science.md` | `calculation-answer.md` |
 | engineering | `final-three-files.md` | `engineering.md` | `calculation-answer.md` |
-| language | `language-summary.md` | `language.md` | `language-practice.md` |
+| language | `language-summary.md` | `language.md` | `language-accumulation.md` |
 
 ## 竞赛
 
@@ -34,3 +34,6 @@
 
 逐点排版同样是共同规则：并列内容一项一行，顺序内容一步一行。它适用于文科论据与影响、
 理科推导与证明、工科流程与注意事项，也适用于语言策略和竞赛解法。
+
+语言是积累路线的例外：不使用题库、阅读板块或最低题量，只维护词汇语法、翻译、写作三个
+独立表格。任何写入都必须发生在结构化展示之后，并得到用户确认。

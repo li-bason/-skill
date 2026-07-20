@@ -39,7 +39,7 @@ def main() -> int:
         ],
         "templates/question-patterns/calculation-answer.md": ["#### Q-...｜计算题"],
         "templates/question-patterns/liberal-arts-answer.md": ["#### Q-...｜简答题"],
-        "templates/question-patterns/language-practice.md": ["A：<选项 A>", "#### LQ-...｜答案"],
+        "templates/question-patterns/language-accumulation.md": ["是否将这个词条加入词汇语法积累表", "英文句子", "最长有效词组优先"],
         "templates/question-patterns/contest-gap-question.md": ["#### CQ-...｜题目", "#### CQ-...｜答案"],
     }
     for relative, fragments in required_fragments.items():

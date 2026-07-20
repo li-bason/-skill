@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a continuous, one-shot brand film for Final Exam Prep.skill."""
+"""Render a continuous, one-shot brand film for StudyForge.skill."""
 
 from __future__ import annotations
 
@@ -119,17 +119,17 @@ def frame_at(t):
     im=Image.new("RGB",(W*SS,H*SS),BG); d=ImageDraw.Draw(im)
     # Persistent camera drift makes every transition part of the same space.
     camx=10*math.sin(t*.42); camy=7*math.sin(t*.31+1)
-    txt(d,(88,52),"FINAL EXAM PREP  /  KNOWLEDGE TO ACTION",13,MUTED,False,"lm")
+    txt(d,(88,52),"STUDYFORGE  /  LEARNING INTO ASSETS",13,MUTED,False,"lm")
     d.ellipse((62*SS,47*SS,72*SS,57*SS),fill=RED)
 
-    # S1 — a physical exam-range sheet lands, breathes, and is scanned.
+    # S1 — a physical learning brief lands, breathes, and is scanned.
     sheet_in=spring(t/1.25); sheet_out=expo((t-3.0)/.75)
     if t < 4.1:
         cx,cy=600+camx,330+camy-230*(1-sheet_in)+420*sheet_out
         ang=-5*(1-sheet_in)+2*math.sin(t*1.7)*(1-sheet_out)
         paper=Image.new("RGBA",(460*SS,320*SS),(0,0,0,0)); p=ImageDraw.Draw(paper)
         p.rounded_rectangle((12*SS,12*SS,448*SS,308*SS),radius=8*SS,fill=PAPER,outline=LINE,width=2*SS)
-        p.text((44*SS,55*SS),"期末复习范围",font=font(27,True),fill=INK)
+        p.text((44*SS,55*SS),"学习目标与资料",font=font(27,True),fill=INK)
         for i,w in enumerate([300,342,250,325,282]):
             y=(112+i*34)*SS; p.line((44*SS,y,(44+w)*SS,y),fill=LINE,width=3*SS)
         scan=expo((t-1.45)/1.15)
@@ -139,10 +139,10 @@ def frame_at(t):
         paper=paper.rotate(ang,resample=Image.Resampling.BICUBIC,expand=True)
         im.paste(paper,(int((cx-paper.width/(2*SS))*SS),int((cy-paper.height/(2*SS))*SS)),paper)
         a=span(t,.35,2.8,.4)
-        txt(d,(600,570),"先锁定考试范围",28,INK,True)
+        txt(d,(600,570),"先理解学习目标",28,INK,True)
 
     # S2/S3 — scan hits pull out of the page and travel on curved paths.
-    labels=["文科","理科","工科","语言","竞赛","期末三件套","语言复习","竞赛补缺","论述","计算","语言练习","缺口题"]
+    labels=["文科","理科","工科","语言","竞赛","课程复习","语言积累","竞赛补缺","考研","认证","课程助教","企业培训"]
     for i,label in enumerate(labels):
         start=2.35+i*.13; p=expo((t-start)/1.05); collapse=expo((t-12.25)/1.0)
         if p<=0 or collapse>=1: continue
@@ -167,8 +167,8 @@ def frame_at(t):
         core_y=350
         r=54*core
         d.ellipse(((core_x+camx-r)*SS,(core_y+camy-r)*SS,(core_x+camx+r)*SS,(core_y+camy+r)*SS),fill=INK,outline=RED,width=4*SS)
-        txt(d,(core_x+camx,core_y-7+camy),"考点",20,PAPER,True)
-        txt(d,(core_x+camx,core_y+20+camy),"驱动",13,"#D9D2C7")
+        txt(d,(core_x+camx,core_y-7+camy),"知识",20,PAPER,True)
+        txt(d,(core_x+camx,core_y+20+camy),"单元",13,"#D9D2C7")
         # rotating evidence ring, visibly connecting process rather than presenting slides
         rr=88+8*math.sin(t*1.6)
         for j in range(4):
@@ -177,9 +177,9 @@ def frame_at(t):
             d.ellipse(((x-5)*SS,(y-5)*SS,(x+5)*SS,(y+5)*SS),fill=RED if j==0 else PAPER,outline=INK)
 
     # Capability copy rides the camera and changes by rolling, not page replacement.
-    copy=[(3.7,6.2,"5 类学科预设", "不同知识结构，调用不同拆解策略"),
-          (6.0,8.6,"3 套复习框架", "期末 · 语言 · 竞赛补缺"),
-          (8.4,11.0,"4 类题型模板", "论述 · 计算 · 语言练习 · 缺口题"),
+    copy=[(3.7,6.2,"5 类学科预设", "不同知识结构，调用不同整理策略"),
+          (6.0,8.6,"4 条应用路径", "课程认证 · 教学培训 · 语言 · 竞赛"),
+          (8.4,11.0,"一套学习底座", "结构化 · 练习 · 积累 · 审计"),
           (10.8,12.8,"定向抽取 + 来源追溯", "只取命中页，让每个结果有据可查")]
     for a,b,title,sub in copy:
         q=span(t,a,b,.35)
@@ -214,10 +214,10 @@ def frame_at(t):
         logo(d,600,248,scale,reveal)
         name=expo((t-13.25)/.7)
         if name>0:
-            txt(d,(600,374+24*(1-name)),"Final Exam Prep.skill",54,INK,True)
-            txt(d,(600,442),"把考试范围，编译成复习行动",27,RED)
+            txt(d,(600,374+24*(1-name)),"StudyForge.skill",54,INK,True)
+            txt(d,(600,442),"把每一次学习，锻造成可复用资产",27,RED)
             w=420*expo((t-13.6)/.7); line(d,[(600-w/2,500),(600+w/2,500)],RED,4)
-            txt(d,(600,535),"5 类学科 · 3 套框架 · 4 类题型 · 质量门禁",18,MUTED,True)
+            txt(d,(600,535),"多场景学习 · 来源追溯 · 增量更新 · 质量门禁",18,MUTED,True)
 
     txt(d,(1150,640),"CREATED BY HUASHU-DESIGN",10,"#A7A198",False,"rs")
     return im.resize((OUT_W,OUT_H),Image.Resampling.LANCZOS)

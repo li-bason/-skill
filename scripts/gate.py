@@ -152,6 +152,18 @@ def main() -> int:
         "output": cross_route.stdout.strip(),
         "error": cross_route.stderr.strip(),
     }
+    language_accumulator = subprocess.run(
+        [sys.executable, str(skill / "scripts" / "test_language_accumulator.py")],
+        cwd=skill,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    report["language_accumulator_regression"] = {
+        "status": "passed" if language_accumulator.returncode == 0 else "failed",
+        "output": language_accumulator.stdout.strip(),
+        "error": language_accumulator.stderr.strip(),
+    }
     try:
         report["package"] = package(skill, skill / "dist")
     except OSError as exc:

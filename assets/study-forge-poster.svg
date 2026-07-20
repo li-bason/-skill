@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="810" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
+  <title id="title">StudyForge 创意概念海报</title>
+  <desc id="desc">把分散的学习输入转化为可追溯、可更新、可验证的学习资产。</desc>
+  <rect width="1440" height="810" fill="#f3f1ea"/><path d="M0 0h1440v18H0z" fill="#c7000b"/>
+  <g font-family="Microsoft YaHei, sans-serif"><text x="84" y="106" font-size="22" fill="#c7000b" font-weight="700">STUDYFORGE · 个人学习资产锻造器</text>
+  <text x="80" y="188" font-size="58" fill="#171717" font-weight="700">把每一次学习，</text><text x="80" y="258" font-size="58" fill="#171717" font-weight="700">锻造成下一次成长的基础。</text>
+  <text x="84" y="310" font-size="22" fill="#5b5b5b">资料整理 · 课程复习 · 竞赛补缺 · 语言积累，共享一套可验证的知识底座。</text>
+  <rect x="82" y="386" width="250" height="164" fill="#171717"/><text x="108" y="428" font-size="18" fill="#d8d3c8">01 · INPUT</text><text x="108" y="474" font-size="30" fill="#fff" font-weight="700">学习输入</text><text x="108" y="516" font-size="17" fill="#c7c7c7">资料 · 问题 · 目标 · 练习</text>
+  <path d="M332 468h62m-12-14 18 14-18 14" fill="none" stroke="#c7000b" stroke-width="6"/>
+  <rect x="410" y="386" width="250" height="164" fill="#fff" stroke="#171717" stroke-width="2"/><text x="436" y="428" font-size="18" fill="#c7000b">02 · STRUCTURE</text><text x="436" y="474" font-size="30" fill="#171717" font-weight="700">知识结构</text><text x="436" y="516" font-size="17" fill="#5b5b5b">定义 · 关系 · 流程 · 应用</text>
+  <path d="M660 468h62m-12-14 18 14-18 14" fill="none" stroke="#c7000b" stroke-width="6"/>
+  <rect x="738" y="386" width="250" height="164" fill="#c7000b"/><text x="764" y="428" font-size="18" fill="#ffd9dc">03 · CONNECT</text><text x="764" y="474" font-size="30" fill="#fff" font-weight="700">持续关联</text><text x="764" y="516" font-size="17" fill="#ffe9eb">追溯来源，识别重复，增量更新</text>
+  <path d="M988 468h62m-12-14 18 14-18 14" fill="none" stroke="#171717" stroke-width="6"/>
+  <rect x="1066" y="386" width="292" height="164" fill="#fff" stroke="#171717" stroke-width="2"/><text x="1092" y="428" font-size="18" fill="#c7000b">04 · VERIFY</text><text x="1092" y="474" font-size="30" fill="#171717" font-weight="700">学习资产</text><text x="1092" y="516" font-size="17" fill="#5b5b5b">可追溯 · 可更新 · 可验证</text>
+  <line x1="82" y1="632" x2="1358" y2="632" stroke="#c8c3b8"/><text x="82" y="684" font-size="19" fill="#171717" font-weight="700">核心创新</text><text x="82" y="724" font-size="18" fill="#5b5b5b">目标先行 / 定向抽取 / 来源追溯 / 增量更新 / 自动质量门禁</text></g>
+</svg>
